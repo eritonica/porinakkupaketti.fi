@@ -10,9 +10,9 @@ export const Sidebar = () => {
   })
 
   return (
-    <FormBuilder submitButtonText={"Lähetä"} header="Huoltotilaus" inputs={[
+    <FormBuilder submitbuttontext={"Lähetä"} header="Huoltotilaus" inputs={[
       { 
-        inputType: "input", 
+        itype: "input", 
         id: "email", 
         label: "Sähköposti",
         type: "email", 
@@ -22,7 +22,7 @@ export const Sidebar = () => {
         value: maintenanceForm.email
       },
       {
-        inputType: "textarea",
+        itype: "textarea",
         id: "message",
         label: "Selvitys huoltopyynnöstä",
         placeholder: "Kirjoita mahdollisimman selkeästi mikä ongelma laitteesi kanssa on.",

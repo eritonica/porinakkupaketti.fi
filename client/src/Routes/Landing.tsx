@@ -31,7 +31,7 @@ export const Landing = () => {
           huoltopalvelua, olet tullut oikeaan paikkaan. Ota yhteyttä 
           meihin, niin autamme sinua löytämään juuri sinun tarpeisiisi 
           sopivan ratkaisun.</Paragraph>
-        <Image src="/images/IMG_20220704_193231.jpg" style={{ marginLeft: "auto", marginRight: "auto"}}></Image>
+        <Image src="/images/IMG_20220704_193231.jpg" style={{ width: "80%", marginLeft: "auto", marginRight: "auto"}}></Image>
         </Flex>
       }
     />
