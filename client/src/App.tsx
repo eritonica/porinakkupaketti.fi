@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<Page />} />
         <Route path="/:page" element={<Page />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/:page" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );

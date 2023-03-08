@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { PageBuilder } from "../../Components/HoosatUI/src";
 import { Login } from '../Components/Login/Login';
 import { Navigation as Nav } from "../Components/Navigation/Navigation";
@@ -15,6 +16,8 @@ interface Session {
 }
 
 export const Admin = () => {
+
+  const location = useLocation();
 
   const [session, setSession] = useState<Session>({
     authenticate: async (email: string, password: string) => {
@@ -87,6 +90,10 @@ export const Admin = () => {
     confirmSession();
   }, [session])
 
+  useEffect(() => {
+    console.log(location);
+  }, [location])
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(CheckSession, []);
   
@@ -95,7 +102,11 @@ export const Admin = () => {
     { (session.token !== undefined) 
       ? <PageBuilder className='admin' style={{ minHeight: "100vh"}}
           navigation={<Nav></Nav>}
-          content={<div></div>}
+          content={
+            (location.pathname === "/admin/") 
+            ? <></>
+            : <></>
+          }
           footer={<div></div>} 
         />
       : <PageBuilder className='admin' style={{ minHeight: "100vh"}}

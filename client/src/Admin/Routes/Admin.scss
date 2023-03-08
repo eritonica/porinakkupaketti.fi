@@ -13,6 +13,15 @@
     grid-area: navigation;
     color: rgba(229, 229, 229, 1);
     background-color: rgba(38, 38, 38, 1);
+    height: fit-content;
+    & > ul {
+      margin: 0px;
+      display: flex;
+      justify-content: space-between;
+      & > li > a > svg {
+        margin-top: 7px;
+      }
+    }
   }
   & > .footer {
     grid-area: footer;
@@ -25,10 +34,13 @@
     grid-template-areas:
       "navigation     content   "
       "navigation     footer    ";
-    & > .navigation > ul {
-      display: flex;
-      justify-content: space-between;
-    }
+    & > .navigation {
+      height: auto;
+      & > ul {
+        display: flex;
+        flex-direction: column;
+      }
+    } 
   }
 }
 
@@ -38,8 +50,11 @@
     grid-template-areas:
       "navigation     content   "
       "navigation     footer    ";
-    & > .navigation > ul {
-      flex-direction: column;
+    & > .navigation {
+      height: auto;
+      & > ul {
+        flex-direction: column;
+      }
     }
   }
 }
