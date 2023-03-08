@@ -17,7 +17,7 @@ export const Sidebar = () => {
         label: "Sähköposti",
         type: "email", 
         placeholder: "Kirjoita sähköpostisi", 
-        variant: "secondary", 
+        variant: "primary", 
         onChange: (e: React.BaseSyntheticEvent) => { setMaintenanceForm({...maintenanceForm,  email: e.target.value })  }, 
         value: maintenanceForm.email
       },
@@ -27,7 +27,7 @@ export const Sidebar = () => {
         label: "Selvitys huoltopyynnöstä",
         placeholder: "Kirjoita mahdollisimman selkeästi mikä ongelma laitteesi kanssa on.",
         style: { height: "330px"},
-        variant: "secondary",
+        variant: "primary",
         onChange: (e: React.BaseSyntheticEvent) => { setMaintenanceForm({...maintenanceForm,  message: e.target.value })  }, 
         value: maintenanceForm.message
       }

@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.scss';
-import { Landing } from './Routes/Landing';
-import { Equipment } from './Routes/Equipment';
-import { References } from './Routes/References';
-import { Contact } from './Routes/Contact';
+import { Page } from './Routes/Page';
+import { Admin } from './Admin/Routes/Admin';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/equipment" element={<Equipment />} />
-        <Route path="/references" element={<References />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<Page />} />
+        <Route path="/:page" element={<Page />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
