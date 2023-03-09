@@ -1,3 +1,6 @@
 [submodule "client/src/Components/HoosatUI"]
 	path = client/src/Components/HoosatUI
 	url = https://github.com/TMKCodes/HoosatUI
+[submodule "client/src/HoosatCMS-client"]
+	path = client/src/HoosatCMS-client
+	url = git@github.com:TMKCodes/HoosatCMS-client.git
