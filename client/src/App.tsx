@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import { Page } from './Routes/Page';
-import { Admin } from './Admin/Routes/Admin';
+import { Admin } from './HoosatCMS-client/src/Routes/Admin';
 
 function App() {
   return (
