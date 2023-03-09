@@ -11,7 +11,7 @@ export const Footer = () => {
         <ListItem>Y-tunnus: 2441864-7</ListItem>
         <ListItem>Puhelin: <Anchor href="tel:040 5913008">040 5913008</Anchor></ListItem>
         <ListItem>Site design by <Anchor href="https://hoosat.fi" style={{padding: "0px"}}>Hoosat Oy</Anchor></ListItem>
-        <ListItem><Link to="/admin">CMS</Link></ListItem>
+        <ListItem><Link to="/hoosatcms">CMS</Link></ListItem>
       </List>
     </Flex>
   );

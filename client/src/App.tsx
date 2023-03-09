@@ -10,8 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Page />} />
         <Route path="/:page" element={<Page />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/:page" element={<Admin />} />
+        <Route path="/hoosatcms" element={<Admin />} />
+        <Route path="/hoosatcms/:page" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
