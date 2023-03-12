@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Heading, PageBuilder, Paragraph, Image, Flex } from '../Components/HoosatUI/src';
+import { Heading, PageBuilder, Paragraph, Image, Flex } from '../HoosatCMS-client/src/HoosatUI/src';
 import { Footer } from '../Components/Footer/Footer';
 import { Header } from '../Components/Header/Header';
 import { Sidebar } from '../Components/Sidebar/Sidebar';

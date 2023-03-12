@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Heading, Image } from '../HoosatUI/src';
+import { Flex, Heading, Image } from '../../HoosatCMS-client/src/HoosatUI/src';
 
 export const Header = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormBuilder } from '../HoosatUI/src';
+import { FormBuilder } from '../../HoosatCMS-client/src/HoosatUI/src';
 
 
 export const Sidebar = () => {

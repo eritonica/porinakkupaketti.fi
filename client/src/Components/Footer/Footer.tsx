@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Anchor, Flex, List, ListItem } from '../HoosatUI/src';
+import { Anchor, Flex, List, ListItem } from '../../HoosatCMS-client/src/HoosatUI/src';
 
 
 export const Footer = () => {
