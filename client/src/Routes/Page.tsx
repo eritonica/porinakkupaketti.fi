@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Heading, PageBuilder, Paragraph, Image, Flex } from '../HoosatCMS-client/src/HoosatUI/src';
 import { Footer } from '../Components/Footer/Footer';
@@ -7,13 +7,40 @@ import { Sidebar } from '../Components/Sidebar/Sidebar';
 import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
 import "./Page.scss";
+import { PagesDTO } from '../HoosatCMS-client/src/@types';
+import { Markdown } from '../HoosatCMS-client/src/Components/Markdown/Markdown';
 
 export const Page = () => {
   const location = useLocation();
+  const [ page, setPage ] = useState<PagesDTO>();
 
   const loadPageContent = useCallback(() => {
     console.log(location);
-
+    const fetchPages = async () => {
+      const api = process.env.REACT_APP_AUTHENTICATION_API;
+      if(api === undefined) {
+        if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
+        return;
+      }
+      const uri = `${api}/pages/link${location.pathname}`;
+      const fetchResult = await fetch(uri, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          'Accept': 'application/json',
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          'Access-Control-Allow-Credentials': 'true'
+        }
+      });
+      const response = await fetchResult.json();
+      if(process.env.NODE_ENV === "development") console.log(response);
+      if(response.result === "success") {
+        setPage(response.page)
+      } else {
+        setPage(undefined)
+      }
+    }
+    fetchPages();
   }, [location])
 
   useEffect(loadPageContent, [location]);
@@ -26,25 +53,7 @@ export const Page = () => {
       footer={<Footer></Footer>}
       content={
         <Flex>
-          <Heading>Tervetuloa Porin Akkupaketin kotisivuille!</Heading>
-          <Paragraph style={{margin: "0px"}}> Olemme Porissa sijaitseva akkujen huoltoon ja valmistukseen
-            erikoistunut yritys, joka tarjoaa korkealaatuisia ja luotettavia akkujen huoltopalveluita 
-            erilaisille laitteille ja sovelluksille.</Paragraph>
-          <Paragraph style={{margin: "0px"}}>Meillä on laaja kokemus ja asiantuntemus erilaisten akkujen 
-            korjauksista ja huolloista. Korjaamme kaiken kokoisia akkuja, aina 
-            sähköisistä polkupyöristä porakoneisiin ja kaikkeen siltä väliltä. 
-            Tarjoamme asiakkaillemme nopean ja ammattitaitoisen palvelun, jonka 
-            avulla pystymme huoltamaan akkusi nopeasti ja tehokkaasti.</Paragraph>
-          <Paragraph style={{margin: "0px"}}>Olemme sitoutuneet tarjoamaan asiakkaillemme parasta 
-            mahdollista palvelua ja haluamme varmistaa, että kaikki korjaustyöt 
-            suoritetaan korkealaatuisesti ja luotettavasti. Käytämme vain 
-            parhaita mahdollisia varaosia ja työskentelemme aina huolellisesti 
-            varmistaaksemme, että korjaustyö onnistuu ongelmitta.</Paragraph>
-          <Paragraph style={{margin: "0px"}}>Jos etsit luotettavaa ja ammattitaitoista akkujen 
-            huoltopalvelua, olet tullut oikeaan paikkaan. Ota yhteyttä 
-            meihin, niin autamme sinua löytämään juuri sinun tarpeisiisi 
-            sopivan ratkaisun.</Paragraph>
-          <Image src="/images/IMG_20220704_193231.jpg" style={{ width: "80%", marginLeft: "auto", marginRight: "auto"}}></Image>
+          <Markdown markdown={(page?.markdown !== undefined) ? page?.markdown : ""}></Markdown>
         </Flex>
       }
     />
