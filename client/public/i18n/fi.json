@@ -1,0 +1,18 @@
+{
+  "pages": {
+    "header": "Sivut",
+    "add-button": "Lisää uusi sivu",
+    "add-page-modal": {
+      "header": "Lisää sivu",
+      "close": "Sulje",
+      "name-input": "Sivun nimi:",
+      "icon-combobox": "Sivun iconi:",
+      "link-input": "Sivun osoite:",
+      "markdown-textarea": "Sivun sisältö (Github flavored markdown):",
+      "domain-input": "Domain osoite:",
+      "submit-button": "Tallenna sivu",
+      "error-message": "Virhe tapahtui, yritä uudelleen",
+      "success-message": "Sivu on tallennettu, voit sulkea tämän."
+    }
+  }
+}

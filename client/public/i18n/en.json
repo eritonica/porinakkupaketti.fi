@@ -1,0 +1,18 @@
+{
+  "pages": {
+    "header": "Pages",
+    "add-button": "Add new page",
+    "add-page-modal": {
+      "header": "Add page",
+      "close": "Close",
+      "name-input": "Name of page:",
+      "icon-combobox": "Icon of the page:",
+      "link-input": "Url of the page:",
+      "markdown-textarea": "Content of the page (Github flavored markdown):",
+      "domain-input": "Domain of the page:",
+      "submit-button": "Save page",
+      "error-message": "Error happened, try again.",
+      "success-message": "Page has been saved, you can close this."
+    }
+  }
+}
