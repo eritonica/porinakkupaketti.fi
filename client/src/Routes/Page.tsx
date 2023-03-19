@@ -8,7 +8,7 @@ import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
 import "./Page.scss";
 import { PagesDTO } from '../HoosatCMS-client/src/@types';
-import { Markdown } from '../HoosatCMS-client/src/Components/Markdown/Markdown';
+import { Markdown } from '../HoosatCMS-client/src/Components/Common/Markdown/Markdown';
 
 export const Page = () => {
   const location = useLocation();
