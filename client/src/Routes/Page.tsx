@@ -22,7 +22,11 @@ export const Page = () => {
         if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
         return;
       }
-      const uri = `${api}/pages/link${location.pathname}`;
+      let pathname = location.pathname;
+      if(location.pathname === "/") {
+        pathname = "/index"
+      } 
+      const uri = `${api}/pages/link${pathname}`;
       const fetchResult = await fetch(uri, {
         method: "GET",
         headers: {

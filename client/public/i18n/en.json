@@ -2,17 +2,20 @@
   "pages": {
     "header": "Pages",
     "add-button": "Add new page",
+    "modify-page-button": "Modify",
+    "delete-page-button": "Delete",
     "add-page-modal": {
       "header": "Add page",
       "close": "Close",
-      "name-input": "Name of page:",
-      "icon-combobox": "Icon of the page:",
-      "link-input": "Url of the page:",
-      "markdown-textarea": "Content of the page (Github flavored markdown):",
-      "domain-input": "Domain of the page:",
+      "name-input": "Name:",
+      "icon-combobox": "Icon:",
+      "link-input": "Link:",
+      "markdown-textarea": "Content (Github flavored markdown):",
+      "domain-input": "Domain:",
       "submit-button": "Save page",
       "error-message": "Error happened, try again.",
-      "success-message": "Page has been saved, you can close this."
+      "success-message": "Page has been saved, you can close this.",
+      "info-message": "/index is the link for landing page of the cms."
     }
   }
 }

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PagesDTO } from '../../HoosatCMS-client/src/@types';
-import { Icons } from '../../HoosatCMS-client/src/Components/Common/Icons/Icons';
 import { Heading, List, ListItem, Image } from '../../HoosatCMS-client/src/HoosatUI/src';
+import { Icons } from '../../HoosatCMS-client/src/HoosatUI/src/Icons/Icons';
 
 export const Navigation = () => {
   const [ pages, setPages ] = useState<PagesDTO[]>([]);
