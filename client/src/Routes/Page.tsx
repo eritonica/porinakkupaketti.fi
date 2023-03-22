@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Heading, PageBuilder, Paragraph, Image, Flex } from '../HoosatCMS-client/src/HoosatUI/src';
+import { Heading, PageBuilder, Paragraph, Image, Flex, Markdown } from '../HoosatCMS-client/src/HoosatUI';
 import { Footer } from '../Components/Footer/Footer';
 import { Header } from '../Components/Header/Header';
 import { Sidebar } from '../Components/Sidebar/Sidebar';
@@ -8,7 +8,6 @@ import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
 import "./Page.scss";
 import { PagesDTO } from '../HoosatCMS-client/src/@types';
-import { Markdown } from '../HoosatCMS-client/src/Components/Common/Markdown/Markdown';
 
 export const Page = () => {
   const location = useLocation();
