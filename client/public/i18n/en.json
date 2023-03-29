@@ -4,6 +4,10 @@
     "add-button": "Add new page",
     "modify-page-button": "Modify",
     "delete-page-button": "Delete",
+    "editor": {
+      "back-button": "Discard",
+      "save-button": "Save"
+    },
     "add-page-modal": {
       "header": "Add page",
       "close": "Close",

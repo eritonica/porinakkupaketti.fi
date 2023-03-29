@@ -48,6 +48,7 @@ export const Navigation = () => {
       </ListItem>
       {
         pages.map(page => (
+          (page.link !== "/index") &&
           <ListItem key={page._id}>
             <Link to={(page.link !== undefined) ? page.link : ""} style={{ textDecoration: "none", color: "inherit" }}>
               <Heading style={{ margin: "0px"}}>

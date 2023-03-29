@@ -4,6 +4,10 @@
     "add-button": "Lisää uusi sivu",
     "modify-page-button": "Muokkaa",
     "delete-page-button": "Poista",
+    "editor": {
+      "back-button": "Peruuta",
+      "save-button": "Tallenna"
+    },
     "add-page-modal": {
       "header": "Lisää sivu",
       "close": "Sulje",
