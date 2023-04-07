@@ -16,9 +16,9 @@ export const Page = () => {
   const loadPageContent = useCallback(() => {
     console.log(location);
     const fetchPages = async () => {
-      const api = process.env.REACT_APP_AUTHENTICATION_API;
+      const api = process.env.REACT_APP_API_ENDPOINT;
       if(api === undefined) {
-        if(process.env.NODE_ENV === "development") console.log("REACT_APP_AUTHENTICATION_API has not been set in environment.");
+        if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
         return;
       }
       let pathname = location.pathname;

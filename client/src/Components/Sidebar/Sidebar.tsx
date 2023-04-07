@@ -7,10 +7,52 @@ export const Sidebar = () => {
   const [maintenanceForm, setMaintenanceForm] = useState({
     email: "",
     message: "",
-  })
+  });
+
+  const [submitButtonText, setSubmitButtonText] = useState("Lähetä");
+
+  const sendContactForm = async () => {
+    const api = process.env.REACT_APP_API_ENDPOINT;
+    if(api === undefined) {
+      if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
+      return;
+    }
+    const uri = `${api}/contact/email`;
+    if(process.env.REACT_APP_FORM_TO_EMAIL === undefined) {
+      if(process.env.NODE_ENV === "development") console.log("REACT_APP_FORM_TO_EMAIL has not been set in environment.");
+      return;
+    }
+    if(process.env.REACT_APP_FORM_SUBJECT === undefined) {
+      if(process.env.NODE_ENV === "development") console.log("REACT_APP_FORM_SUBJECT has not been set in environment.");
+      return;
+    }
+    const body = {
+      from: maintenanceForm.email,
+      to: process.env.REACT_APP_FORM_TO_EMAIL,
+      subject: process.env.REACT_APP_FORM_SUBJECT,
+      text: maintenanceForm.message
+    };
+    const fetchResult = await fetch(uri, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        'Accept': 'application/json',
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        'Access-Control-Allow-Credentials': 'true'
+      },
+      body: JSON.stringify(body)
+    });
+    const response = await fetchResult.json();
+    if(process.env.NODE_ENV === "development") console.log(response);
+    if(response.result === "success") {
+      setSubmitButtonText("Lähetetty");
+    } else {
+      setSubmitButtonText("Lähetys epäonnistui");
+    }
+  }
 
   return (
-    <FormBuilder submitbuttontext={"Lähetä"} header="Huoltotilaus" inputs={[
+    <FormBuilder submitbuttontext={submitButtonText} header="Huoltotilaus" inputs={[
       { 
         itype: "input", 
         id: "email", 
@@ -31,8 +73,10 @@ export const Sidebar = () => {
         onChange: (e: React.BaseSyntheticEvent) => { setMaintenanceForm({...maintenanceForm,  message: e.target.value })  }, 
         value: maintenanceForm.message
       }
-    ]} onSubmit={function (value: React.BaseSyntheticEvent<object, any, any>): void {
-      throw new Error('Function not implemented.');
-    } }></FormBuilder>
+    ]} 
+    onSubmit={(e: React.BaseSyntheticEvent) => {
+      sendContactForm();
+    } 
+    }></FormBuilder>
   );
 }
