@@ -38,7 +38,7 @@
       "save-button": "Save"
     },
     "add": {
-      "header": "name:",
+      "header": "Name:",
       "submit-button": "Save Article"
     }
   }

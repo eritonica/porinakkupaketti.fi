@@ -1,7 +1,8 @@
 {
   "pages": {
     "header": "Sivut",
-    "add-button": "Lisää uusi sivu",
+    "list-button": "Sivut",
+    "add-button": "Lisää",
     "modify-page-button": "Muokkaa",
     "delete-page-button": "Poista",
     "update-page-button": "Päivitä",
@@ -9,18 +10,36 @@
       "back-button": "Peruuta",
       "save-button": "Tallenna"
     },
-    "add-page-modal": {
+    "add": {
       "header": "Lisää sivu",
       "close": "Sulje",
-      "name-input": "nimi:",
+      "name-input": "Nimi:",
       "icon-combobox": "Iconi:",
-      "link-input": "Osoite:",
+      "link-input": "Linkki:",
       "markdown-textarea": "Sisältö (Github flavored markdown):",
-      "domain-input": "Domain osoite:",
+      "domain-input": "Osoite:",
       "submit-button": "Tallenna sivu",
-      "error-message": "Virhe tapahtui, yritä uudelleen",
-      "success-message": "Sivu on tallennettu, voit sulkea tämän.",
-      "info-message": "/index on CMS etusivun osoite."
+      "error-message": "Virhe tapahtui, yritä uudelleen.",
+      "success-message": "Sivu on päivitetty onnistuneesti.",
+      "info-message": "/index osoite on sivun pääsivu."
+    },
+    "update-success-message": "Sivun päivitys onnistui!"
+  },
+  "posts": {
+    "header": "Artikkelit",
+    "list-button": "Artikkelit",
+    "add-button": "Lisää",
+    "modify-button": "Muokkaa",
+    "delete-button": "Poista",
+    "publish-button": "Julkaise",
+    "unpublish-button": "Piilota",
+    "editor": {
+      "back-button": "Peruuta",
+      "save-button": "Tallenna"
+    },
+    "add": {
+      "header": "Nimi:",
+      "submit-button": "Tallenna"
     }
   }
 }
