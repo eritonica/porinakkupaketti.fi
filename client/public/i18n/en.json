@@ -7,7 +7,7 @@
     "delete-page-button": "Delete",
     "update-page-button": "Update",
     "editor": {
-      "back-button": "Discard",
+      "back-button": "Cancel",
       "save-button": "Save"
     },
     "add": {
@@ -26,20 +26,20 @@
     "update-success-message": "Page update was success!"
   },
   "posts": {
-    "header": "Blog",
-    "list-button": "Posts",
+    "header": "Articles",
+    "list-button": "Articles",
     "add-button": "Add New",
     "modify-button": "Modify",
     "delete-button": "Delete",
     "publish-button": "Publish",
     "unpublish-button": "Unpublish",
     "editor": {
-      "back-button": "Discard",
+      "back-button": "Cancel",
       "save-button": "Save"
     },
     "add": {
-      "form-header-label": "Blog post name:",
-      "submit-button": "Create new post"
+      "header": "name:",
+      "submit-button": "Save Article"
     }
   }
 }
