@@ -10,7 +10,7 @@
       "back-button": "Discard",
       "save-button": "Save"
     },
-    "add-page-modal": {
+    "add": {
       "header": "Add page",
       "close": "Close",
       "name-input": "Name:",
@@ -29,6 +29,14 @@
     "header": "Blog",
     "list-button": "Posts",
     "add-button": "Add New",
+    "modify-button": "Modify",
+    "delete-button": "Delete",
+    "publish-button": "Publish",
+    "unpublish-button": "Unpublish",
+    "editor": {
+      "back-button": "Discard",
+      "save-button": "Save"
+    },
     "add": {
       "form-header-label": "Blog post name:",
       "submit-button": "Create new post"
