@@ -24,6 +24,9 @@
   .Textarea {
     background-color: rgb(255, 255, 255) !important;
   }
+  & > .header > .Flex > h1 {
+    color: black;
+  }
   & > .navigation {
     background-color: lighten(#43507f, 15%);
     color: black; 

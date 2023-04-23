@@ -1,9 +1,11 @@
 {
   "pages": {
     "header": "Pages",
-    "add-button": "Add new page",
+    "list-button": "Pages",
+    "add-button": "Add new",
     "modify-page-button": "Modify",
     "delete-page-button": "Delete",
+    "update-page-button": "Update",
     "editor": {
       "back-button": "Discard",
       "save-button": "Save"
@@ -20,6 +22,16 @@
       "error-message": "Error happened, try again.",
       "success-message": "Page has been saved, you can close this.",
       "info-message": "/index is the link for landing page of the cms."
+    },
+    "update-success-message": "Page update was success!"
+  },
+  "posts": {
+    "header": "Blog",
+    "list-button": "Posts",
+    "add-button": "Add New",
+    "add": {
+      "form-header-label": "Blog post name:",
+      "submit-button": "Create new post"
     }
   }
 }

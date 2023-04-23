@@ -7,11 +7,11 @@ import { Sidebar } from '../Components/Sidebar/Sidebar';
 import { Navigation as Nav } from "../Components/Navigation/Navigation";
 
 import "./Page.scss";
-import { PagesDTO } from '../HoosatCMS-client/src/@types';
+import { PageDTO } from '../HoosatCMS-client/src/@types';
 
 export const Page = () => {
   const location = useLocation();
-  const [ page, setPage ] = useState<PagesDTO>();
+  const [ page, setPage ] = useState<PageDTO>();
 
   const loadPageContent = useCallback(() => {
     console.log(location);

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PagesDTO } from '../../HoosatCMS-client/src/@types';
+import { PageDTO } from '../../HoosatCMS-client/src/@types';
 import { Heading, List, ListItem, Image } from '../../HoosatCMS-client/src/HoosatUI/src';
 import { Icons } from '../../HoosatCMS-client/src/HoosatUI/src/Icons/Icons';
 
 export const Navigation = () => {
-  const [ pages, setPages ] = useState<PagesDTO[]>([]);
+  const [ pages, setPages ] = useState<PageDTO[]>([]);
   const [ selectedLine, setSelectedLine ] = useState("");
 
   const getPagesByDomain = useCallback(() => {

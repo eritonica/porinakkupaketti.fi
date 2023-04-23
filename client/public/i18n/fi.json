@@ -4,6 +4,7 @@
     "add-button": "Lisää uusi sivu",
     "modify-page-button": "Muokkaa",
     "delete-page-button": "Poista",
+    "update-page-button": "Päivitä",
     "editor": {
       "back-button": "Peruuta",
       "save-button": "Tallenna"
