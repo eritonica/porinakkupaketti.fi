@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Heading, PageBuilder, Paragraph, Image, Flex, Markdown } from '../HoosatCMS-client/src/HoosatUI';
+import { PageBuilder, Flex, Markdown } from '../HoosatCMS-client/src/HoosatUI';
 import { Footer } from '../Components/Footer/Footer';
 import { Header } from '../Components/Header/Header';
 import { Sidebar } from '../Components/Sidebar/Sidebar';
@@ -46,7 +46,7 @@ export const Page = () => {
     fetchPages();
   }, [location])
 
-  useEffect(loadPageContent, [location]);
+  useEffect(loadPageContent, [location, loadPageContent]);
 
   return (
     <PageBuilder className='page'
@@ -54,7 +54,7 @@ export const Page = () => {
       navigation={<Nav></Nav>}
       sidebar={<Sidebar></Sidebar>}
       footer={<Footer></Footer>}
-      content={
+      body={
         <Flex>
           <Markdown markdown={(page?.markdown !== undefined) ? page?.markdown : ""}></Markdown>
         </Flex>
