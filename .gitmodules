@@ -1,0 +1,6 @@
+[submodule "src/client/HoosatUI"]
+	path = src/client/HoosatUI
+	url = git@github.com:Hoosat-Oy/HoosatUI.git
+[submodule "src/client/HoosatCMS-client"]
+	path = src/client/HoosatCMS-client
+	url = git@github.com:Hoosat-Oy/HoosatCMS-client.git
