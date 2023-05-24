@@ -140,7 +140,7 @@ authenticationRouter.Post("/api/authentication/register", async (req, res) => {
 });
 /**
  * Activate user account using provided activation code
- * @route POST /authentication/activate/:code
+ * @route Get /authentication/activate/:code
  * @group Authentication
  * @param {Object} req - The HTTP request Object.
  * @param {Object} res - The HTTP response Object.

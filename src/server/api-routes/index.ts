@@ -6,10 +6,6 @@ import { commonRouter } from "./common";
 const APIRouter = createRouter();
 
 
-
-
-
-
 APIRouter.UseRouter(accessRouter);
 APIRouter.UseRouter(cmsRouter);
 APIRouter.UseRouter(commonRouter);

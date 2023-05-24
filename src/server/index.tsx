@@ -27,18 +27,21 @@ const generatePassword = async () => {
 }
 generatePassword();
 
-
-mongoose.connect(process.env.ATLAS_URI || "");
+mongoose.set('strictQuery', true);
+mongoose.connect(process.env.ATLAS_URI!, {
+  autoIndex: true,
+  ssl: true,
+});
 
 
 // Create a router
 const router = createRouter();
 
 // Define routes and middleware
-router.Middleware(cors('http://localhost:3000/', 'GET, POST, PUT, DELETE'));
+router.Middleware(cors(process.env.ORIGINS!, 'GET, POST, PUT, DELETE'));
 
 // Serve static files from the "public" directory
-router.Middleware(assets("./public"));
+router.Middleware(assets(process.env.PUBLIC!));
 
 // Use Router from another module.
 router.UseRouter(APIRouter);
