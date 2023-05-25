@@ -19,6 +19,7 @@ import { Admin } from './HoosatCMS-client';
 
 
 export default function App() {
+  console.log(process.env);
   return (
     <Routes>
       <Route path="/" element={<Page />} />

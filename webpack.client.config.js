@@ -6,6 +6,10 @@ import webpack from 'webpack';
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Filter out environment keys that do not start with "REACT_"
+const filteredEnv = Object.keys(process.env)
+  .filter((key) => key.startsWith('REACT_'));
+
 // Export the configuration object
 export default {
   // Set the source map type to "source-map" for easier debugging
@@ -71,8 +75,7 @@ export default {
       '__filename': false,
       '__dirname': false
     }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(process.env),
-    }),
+    new webpack.EnvironmentPlugin(filteredEnv), // Use the filtered environment object
+  
   ]
 };

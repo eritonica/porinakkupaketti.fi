@@ -60,8 +60,16 @@ export default {
   },
   // Specify the file extensions to resolve
   resolve: {
+    alias: {
+      'mongodb-client-encryption': 'mongodb-client-encryption-browserify'
+    },
     extensions: [".tsx", ".ts", ".js", ".jsx", ".node"],
   },
+  ignoreWarnings: [
+    /aws-crt/, 
+    /mongodb\/lib\/utils.js/, 
+    /mongodb\/lib\/deps.js/
+  ],
   plugins: [
     new webpack.DefinePlugin({
       'global.GENTLY': false,
@@ -70,5 +78,5 @@ export default {
       '__filename': false,
       '__dirname': false
     })
-  ]
+  ],
 };
