@@ -13,7 +13,7 @@ export const Navigation = () => {
         if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
         return;
       }
-      const uri = `${api}/pages/domain/${'localhost'}`;
+      const uri = `${api}/pages/domain/${window.location.hostname}`;
       const fetchResult = await fetch(uri, {
         method: "GET",
         headers: {

@@ -29,7 +29,6 @@ const pagesSchema: Schema<PagesDBO> = new Schema({
   },
   name: { 
     type: String,
-    unique: true,
     required: true
   },
   order: {
@@ -38,7 +37,6 @@ const pagesSchema: Schema<PagesDBO> = new Schema({
   },
   link: {
     type: String,
-    unique: true,
     required: true,
   },
   markdown: {

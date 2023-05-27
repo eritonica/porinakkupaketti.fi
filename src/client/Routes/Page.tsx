@@ -25,7 +25,7 @@ export const Page = () => {
       if(location.pathname === "/") {
         pathname = "/index"
       } 
-      const uri = `${api}/pages/link${pathname}`;
+      const uri = `${api}/pages/domain/${window.location.hostname}/link${pathname}`;
       const fetchResult = await fetch(uri, {
         method: "GET",
         headers: {
@@ -35,7 +35,7 @@ export const Page = () => {
         }
       });
       const response = await fetchResult.json();
-      if(process.env.NODE_ENV === "development") console.log(response);
+      if(process.env.NODE_ENV === "development") console.log("response: ", response);
       if(response.result === "success") {
         setPage(response.page)
       } else {

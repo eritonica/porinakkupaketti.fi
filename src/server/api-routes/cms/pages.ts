@@ -125,6 +125,32 @@ pagesRouter.Get("/api/pages/link/:link", async (req, res) => {
 });
 
 /**
+ * Handles HTTP Get requests for getting page by domain and link.
+ * @function
+ * @async
+ * @param {object} req - The HTTP rquest object.
+ * @param {string} req.params.link - The link of the page to get.
+ * @param {string} req.params.domain - The link of the page to get.
+ * @param {object} res - The HTTP response object.
+ * @returns {Object} The HTTP with status code and JSON object with result, message and article properties.
+ * @throws {Object} The HTTP response with status code and error message.
+ */
+pagesRouter.Get("/api/pages/domain/:domain/link/:link", async (req, res) => {
+  try {
+    console.log("Domain: ", req.params['domain']);
+    console.log("Link: ", req.params['link']);
+    if(req.params['domain'] === undefined) {
+      return res.status(500).json({ result: "error", message: "Domain was empty" });
+    }
+    let { pages } = await getPagesByDomain(req.params['domain']);
+    pages = pages.filter((page) => page.link === "/" + req.params['link']);
+    return res.status(200).json({ result: "success", message: "Page has been found.", page: pages[0] });
+  } catch (error) {
+    return res.status(500).json(ErrorHandler(error));
+  }
+});
+
+/**
  * Handles HTTP Get requests for getting page by domain.
  * @function
  * @async
