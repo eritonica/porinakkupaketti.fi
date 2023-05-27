@@ -4,19 +4,32 @@
 }
 
 
-
-h1, h2, h3, h4 {
-  color:#f3b573;
-}
 .Input {
   background-color: rgb(255, 255, 255) !important;
 }
+
 .Textarea {
   background-color: rgb(255, 255, 255) !important;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li > a:hover {
+  color:rgba(251, 251, 251, 0.09) !important;
+}
+
+li > a > h1:hover {
+  color:rgba(251, 251, 251, 0.09) !important;
+}
+
 .page > .header > .Flex > h1 {
   color: black;
 }
+
+
 .page > .navigation {
   background-color: #43507f;
   color: black; 
