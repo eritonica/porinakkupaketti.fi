@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageDTO } from '../HoosatCMS-client/src/@types';
-import { Heading, Icons, List, ListItem } from '../HoosatUI';
+import { Heading, Icon, List, ListItem } from '../HoosatUI';
 
 export const Navigation = () => {
   const [ pages, setPages ] = useState<PageDTO[]>([]);
@@ -49,7 +49,7 @@ export const Navigation = () => {
           <ListItem key={page._id}>
             <Link to={(page.link !== undefined) ? page.link : ""} >
               <Heading style={{ margin: "0px"}}>
-                <Icons icon={(page.icon !== undefined) ? page.icon : ""} type={'outline'} style={{ height: "24px", paddingRight: "1rem"}}></Icons>
+                <Icon name={(page.icon !== undefined) ? page.icon : ""}  style={{ height: "24px", paddingRight: "1rem"}} />
                 { page.name }
               </Heading>
             </Link>
