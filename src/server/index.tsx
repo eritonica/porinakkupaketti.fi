@@ -16,6 +16,7 @@ import { cors } from './core/cors';
 import { HelmetContext } from './core/types';
 import { createRouter, createServer, listen } from './core/server';
 import { assets } from './core/assets';
+import { upload } from './core/upload';
 import { APIRouter } from './api-routes';
 import mongoose from 'mongoose';
 
@@ -40,11 +41,21 @@ const router = createRouter();
 // Define routes and middleware
 router.Middleware(cors(process.env.ORIGINS!, 'GET, POST, PUT, DELETE'));
 
-// Serve static files from the "public" directory
+// Serve static files from the "public" directory.
 router.Middleware(assets(process.env.PUBLIC!));
+
+// Handle multipart/form-data file uploading.
+router.Middleware(upload(process.env.PUBLIC!));
 
 // Use Router from another module.
 router.UseRouter(APIRouter);
+
+router.Post('/upload', (req, res) => {
+  // Access the uploaded files through req.files
+  console.log(req.files);
+  // Since the file upload was handled globally by middleware send a response.
+  res.status(200).json({ result: "success", files: req.files });
+});
 
 router.Get("*", (req, res) => {
   const helmetContext: HelmetContext = {};
