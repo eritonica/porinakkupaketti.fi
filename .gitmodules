@@ -4,3 +4,6 @@
 [submodule "src/client/HoosatCMS-client"]
 	path = src/client/HoosatCMS-client
 	url = git@github.com:Hoosat-Oy/HoosatCMS-client.git
+[submodule "src/server/core"]
+	path = src/server/core
+	url = https://github.com/Hoosat-Oy/hoosat-server-core.git
