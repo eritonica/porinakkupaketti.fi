@@ -49,7 +49,7 @@ export const Navigation = () => {
           <ListItem key={page._id}>
             <Link to={(page.link !== undefined) ? page.link : ""} >
               <Heading style={{ margin: "0px"}}>
-                <Icon name={(page.icon !== undefined) ? page.icon : ""}  style={{ height: "24px", paddingRight: "1rem"}} />
+                <Icon name={(page.icon !== undefined) ? page.icon : ""}  style={{ height: "18pt", width: "18pt", paddingRight: "1rem" }} />
                 { page.name }
               </Heading>
             </Link>
