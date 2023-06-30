@@ -22,6 +22,7 @@ import mongoose from 'mongoose';
 
 // generate password.
 import Cryptology from './lib/common/Cryptology';
+import { generatePreloadTags } from './core/preload';
 
 const generatePassword = async () => {
   console.log(await Cryptology.encrypt("hoosat-template-working??"))
@@ -59,13 +60,31 @@ router.Post('/upload', (req, res) => {
 
 router.Get("*", (req, res) => {
   const helmetContext: HelmetContext = {};
+  let preloadTags: string[];
+  if(process.env.NODE_ENV === "development") {
+    preloadTags = generatePreloadTags('./build/public', '/');
+  } else {
+    preloadTags = generatePreloadTags('/home/marko/porinakkupaketti.fi/build/public', '/');
+  }
+
+  const replaceStream = replaceHeadTags({
+    title: helmetContext.helmet?.title?.toString() || '',
+    meta: helmetContext.helmet?.meta?.toString() || '',
+    link: preloadTags.join("\n") + (helmetContext.helmet?.link?.toString() || ''),
+    script: helmetContext.helmet?.script?.toString() || '',
+    base: helmetContext.helmet?.base?.toString() || '',
+    style: helmetContext.helmet?.style?.toString() || '',
+  });
+
   // Rendering the App component to a pipeable stream
   const { pipe } = renderToPipeableStream(
     <React.StrictMode>
       <HelmetProvider context={helmetContext}>
-        <html>
-          <head>
+        <html lang="FI-fi">
+          <head >
             <meta charSet="utf-8" />
+            <title>Porin Akkupaketti</title>
+            <meta name="description" content="Porin Akkupaketti, teemme pienakkujen huoltamista ja kierrätämme niitä. Porin Akkupaketti (c) MTH-TEK tmi, Author: Hoosat Oy, Designer: Toni Lukkaroinen" />
             <link rel="icon" href="/logo/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="manifest" href="/manifest.json" />
@@ -84,14 +103,6 @@ router.Get("*", (req, res) => {
     {
       bootstrapScripts: ['/bundle.js'],
       onShellReady: async () => {
-        const replaceStream = replaceHeadTags({
-          title: helmetContext.helmet?.title?.toString() || '',
-          style: helmetContext.helmet?.script?.toString() || '',
-          meta: helmetContext.helmet?.meta?.toString() || '',
-          link: helmetContext.helmet?.link?.toString() || '',
-          script: helmetContext.helmet?.script?.toString() || '',
-          base: helmetContext.helmet?.script?.toString() || '',
-        });
         pipe(replaceStream).pipe(res.serverResponse);
       },
       onShellError(error) {
@@ -103,8 +114,10 @@ router.Get("*", (req, res) => {
         console.error(error);
         ErrorHandler(error);
       }
-    });
+    }
+  );
 });
+
 
 // Create the server
 const server = createServer(router);

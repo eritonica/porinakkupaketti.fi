@@ -8,6 +8,7 @@ import { Navigation as Nav } from "../Components/Navigation";
 
 import "./Page.css";
 import { PageDTO } from '../HoosatCMS-client/src/@types';
+import { Helmet } from 'react-helmet-async';
 
 export const Page = () => {
   const location = useLocation();
@@ -48,7 +49,12 @@ export const Page = () => {
   useEffect(loadPageContent, [location, loadPageContent]);
 
   return (
-    <PageBuilder className='page'
+    <>
+    <Helmet>
+      <title>{`Porin Akkupaketti - ${page?.name}`}</title>
+      <meta name="description" content={page?.markdown?.substring(0, 30)} />
+    </Helmet>
+    <PageBuilder className='website'
       header={<Header ></Header>}
       navigation={<Nav></Nav>}
       sidebar={<Sidebar></Sidebar>}
@@ -59,5 +65,6 @@ export const Page = () => {
         </Flex>
       }
     />
+    </>
   );
 }
