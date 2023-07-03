@@ -126,7 +126,7 @@ groupsRouter.Get("/api/group/:id", async (req, res) => {
     if(!account) {
       return res.status(500).json({ result: "error", message: "Permission denied."})
     }
-    const groupId = new mongoose.Types.ObjectId(req.params['id']);
+    const groupId = new mongoose.Types.ObjectId(req.params?.['id']);
     return res.status(200).json(await getGroup(groupId));
   } catch (error) {
     console.log(error);
@@ -146,7 +146,7 @@ groupsRouter.Get("/api/group/:id", async (req, res) => {
 groupsRouter.Delete("/api/group/:id", async (req, res) => {
   try {
     const { account } = await confirmToken(req.headers.authorization);
-    const groupId = new mongoose.Types.ObjectId(req.params['id']);
+    const groupId = new mongoose.Types.ObjectId(req.params?.['id']);
     const {group} = await getGroup(groupId);
     if(group === null) {
       throw new Error("Could not find group with the ID.");
@@ -174,7 +174,7 @@ groupsRouter.Delete("/api/group/:id", async (req, res) => {
 groupsRouter.Get("/api/group/:id/members", async (req, res) => {
   try {
     const { account } = await confirmToken(req.headers.authorization);
-    const groupId = new mongoose.Types.ObjectId(req.params['id']);
+    const groupId = new mongoose.Types.ObjectId(req.params?.['id']);
     const { group } = await getGroup(groupId);
     if(group === null) {
       throw new Error("Could not find group with the ID.");

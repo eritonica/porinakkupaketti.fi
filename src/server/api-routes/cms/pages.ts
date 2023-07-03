@@ -97,7 +97,7 @@ pagesRouter.Delete("/api/pages/:id", async (req, res) => {
     if(permission !== true) {
       return res.status(500).json({ result: "error", message: "No permission." })
     }
-    return res.status(200).json(await deletePage(req.params['id']));
+    return res.status(200).json(await deletePage(req.params?.['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -117,8 +117,8 @@ pagesRouter.Delete("/api/pages/:id", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/link/:link", async (req, res) => {
   try {
-    console.log(req.params['link']);
-    return res.status(200).json(await getPageByLink(req.params['link']));
+    console.log(req.params?.['link']);
+    return res.status(200).json(await getPageByLink(req.params?.['link']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -137,13 +137,13 @@ pagesRouter.Get("/api/pages/link/:link", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/domain/:domain/link/:link", async (req, res) => {
   try {
-    console.log("Domain: ", req.params['domain']);
-    console.log("Link: ", req.params['link']);
-    if(req.params['domain'] === undefined) {
+    console.log("Domain: ", req.params?.['domain']);
+    console.log("Link: ", req.params?.['link']);
+    if(req.params?.['domain'] === undefined) {
       return res.status(500).json({ result: "error", message: "Domain was empty" });
     }
-    let { pages } = await getPagesByDomain(req.params['domain']);
-    pages = pages.filter((page) => page.link === "/" + req.params['link']);
+    let { pages } = await getPagesByDomain(req.params?.['domain']);
+    pages = pages.filter((page) => page.link === "/" + req.params?.['link']);
     return res.status(200).json({ result: "success", message: "Page has been found.", page: pages[0] });
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
@@ -162,10 +162,10 @@ pagesRouter.Get("/api/pages/domain/:domain/link/:link", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/domain/:domain", async (req, res) => {
   try {
-    if(req.params['domain'] === undefined) {
+    if(req.params?.['domain'] === undefined) {
       return res.status(500).json({ result: "error", message: "Domain was empty" });
     }
-    return res.status(200).json(await getPagesByDomain(req.params['domain']));
+    return res.status(200).json(await getPagesByDomain(req.params?.['domain']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -183,10 +183,10 @@ pagesRouter.Get("/api/pages/domain/:domain", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/author/:author", async (req, res) => {
   try {
-    if(req.params['author'] === undefined) {
+    if(req.params?.['author'] === undefined) {
       return res.status(500).json({ result: "error", message: "Author was empty" });
     }
-    return res.status(200).json(await getPagesByDomain(req.params['author']));
+    return res.status(200).json(await getPagesByDomain(req.params?.['author']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -205,10 +205,10 @@ pagesRouter.Get("/api/pages/author/:author", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/group/:group", async (req, res) => {
   try {
-    if(req.params['group'] === undefined) {
+    if(req.params?.['group'] === undefined) {
       return res.status(500).json({ result: "error", message: "Group was empty" });
     }
-    return res.status(200).json(await getPagesByDomain(req.params['group']));
+    return res.status(200).json(await getPagesByDomain(req.params?.['group']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -226,7 +226,7 @@ pagesRouter.Get("/api/pages/group/:group", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/:id", async (req, res) => { 
   try {
-    return res.status(200).json(await getPage(req.params['id']));
+    return res.status(200).json(await getPage(req.params?.['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }

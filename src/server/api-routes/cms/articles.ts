@@ -133,7 +133,7 @@ articlesRouter.Delete("/api/articles/:id", async (req, res) => {
     if(permission !== true) {
       return res.status(500).json({ result: "error", message: "No permission." })
     }
-    return res.status(200).json(await deleteArticle(req.params['id']));
+    return res.status(200).json(await deleteArticle(req.params?.['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -167,7 +167,7 @@ articlesRouter.Get("/api/articles/", async (_req, res) => {
  */
 articlesRouter.Get("/api/article/:id", async (req, res) => {
   try {
-    return res.status(200).json(await getArticle(req.params['id']));
+    return res.status(200).json(await getArticle(req.params?.['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -185,7 +185,7 @@ articlesRouter.Get("/api/article/:id", async (req, res) => {
 articlesRouter.Get("/api/articles/group/:id", async (req, res) => {
   try {
     const { account } = await confirmToken(req.headers.authorization);
-    const groupId = new mongoose.Types.ObjectId(req.params['id']);
+    const groupId = new mongoose.Types.ObjectId(req.params?.['id']);
     const { group } = await confirmGroupPermission("READ", { _id : groupId },  account);
     return res.status(200).json(await getArticlesByGroup(group));
   } catch (error) {
@@ -204,7 +204,7 @@ articlesRouter.Get("/api/articles/group/:id", async (req, res) => {
  */
 articlesRouter.Get("/api/articles/domain/:id", async (req, res) => {
   try {
-    return res.status(200).json(await getArticlesByDomain(req.params['id']));
+    return res.status(200).json(await getArticlesByDomain(req.params?.['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }

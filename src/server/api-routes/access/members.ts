@@ -118,7 +118,7 @@ membersRouter.Delete("/api/members/", async (req, res) => {
 membersRouter.Get("/api/members/group/:id", async (req, res) => {
   try {
     const { account } = await confirmToken(req.headers.authorization);
-    const groupId = new mongoose.Types.ObjectId(req.params['id']);
+    const groupId = new mongoose.Types.ObjectId(req.params?.['id']);
     const { group } = await getGroup(groupId);
     const { permission } = await confirmGroupPermission("READ", group, account);
     if(permission !== true) {

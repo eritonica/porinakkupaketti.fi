@@ -46,14 +46,14 @@ router.Middleware(cors(process.env.ORIGINS!, 'GET, POST, PUT, DELETE'));
 router.Middleware(assets(process.env.PUBLIC!));
 
 // Handle multipart/form-data file uploading.
-router.Middleware(upload(process.env.PUBLIC!));
+router.Middleware(upload(`./build/public`));
 
 // Use Router from another module.
 router.UseRouter(APIRouter);
 
-router.Post('/upload', (req, res) => {
+router.Post('/api/upload', (req, res) => {
   // Access the uploaded files through req.files
-  console.log(req.files);
+  console.log(req.parts);
   // Since the file upload was handled globally by middleware send a response.
   res.status(200).json({ result: "success", files: req.files });
 });
@@ -77,7 +77,7 @@ router.Get("*", (req, res) => {
   });
 
   // Rendering the App component to a pipeable stream
-  const { pipe } = renderToPipeableStream(
+  const stream = renderToPipeableStream(
     <React.StrictMode>
       <HelmetProvider context={helmetContext}>
         <html lang="FI-fi">
@@ -103,7 +103,8 @@ router.Get("*", (req, res) => {
     {
       bootstrapScripts: ['/bundle.js'],
       onShellReady: async () => {
-        pipe(replaceStream).pipe(res.serverResponse);
+        res.setHeader('content-type', 'text/html');
+        stream.pipe(replaceStream).pipe(res)
       },
       onShellError(error) {
         console.log(error);

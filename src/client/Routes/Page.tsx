@@ -1,70 +1,31 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { PageBuilder, Flex, Markdown } from '../HoosatUI';
+import React, { Suspense} from 'react';
+import { PageBuilder } from '../HoosatUI';
 import { Footer } from '../Components/Footer';
 import { Header } from '../Components/Header';
 import { Sidebar } from '../Components/Sidebar';
 import { Navigation as Nav } from "../Components/Navigation";
+import { Contents } from '../Components/Contents';
 
 import "./Page.css";
-import { PageDTO } from '../HoosatCMS-client/src/@types';
-import { Helmet } from 'react-helmet-async';
 
 export const Page = () => {
-  const location = useLocation();
-  const [ page, setPage ] = useState<PageDTO>();
-
-  const loadPageContent = useCallback(() => {
-    console.log(location);
-    const fetchPages = async () => {
-      const api = process.env.REACT_APP_API_ENDPOINT;
-      if(api === undefined) {
-        if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
-        return;
-      }
-      let pathname = location.pathname;
-      if(location.pathname === "/") {
-        pathname = "/index"
-      } 
-      const uri = `${api}/pages/domain/${window.location.hostname}/link${pathname}`;
-      const fetchResult = await fetch(uri, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          'Accept': 'application/json',
-          'Access-Control-Allow-Credentials': 'true'
-        }
-      });
-      const response = await fetchResult.json();
-      if(process.env.NODE_ENV === "development") console.log("response: ", response);
-      if(response.result === "success") {
-        setPage(response.page)
-      } else {
-        setPage(undefined)
-      }
-    }
-    fetchPages();
-  }, [location])
-
-  useEffect(loadPageContent, [location, loadPageContent]);
+  
 
   return (
-    <>
-    <Helmet>
-      <title>{`Porin Akkupaketti - ${page?.name}`}</title>
-      <meta name="description" content={page?.markdown?.substring(0, 30)} />
-    </Helmet>
     <PageBuilder className='website'
       header={<Header ></Header>}
-      navigation={<Nav></Nav>}
+      navigation={
+        <Suspense fallback={<progress value={undefined} />}>
+          <Nav></Nav>
+        </Suspense>
+      }
       sidebar={<Sidebar></Sidebar>}
       footer={<Footer></Footer>}
       body={
-        <Flex>
-          <Markdown markdown={(page?.markdown !== undefined) ? page?.markdown : ""}></Markdown>
-        </Flex>
+          <Suspense fallback={<progress value={undefined} />}>
+            <Contents></Contents>
+          </Suspense>
       }
     />
-    </>
   );
 }

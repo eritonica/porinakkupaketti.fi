@@ -6,7 +6,7 @@ const contactFormRouter = createRouter();
 
 contactFormRouter.Post("/api/contact/email", async (req, res) => {
   try {
-    const ip = req.headers['x-forwarded-for'] || req.incomingMessage.socket.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const rate = await rateLimitByIP(ip, 2500);
     if(rate === true) {
       Mailer.sendMail(req.body.from, req.body.to, req.body.subject, req.body.text);
