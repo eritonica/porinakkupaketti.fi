@@ -41,5 +41,12 @@
       "header": "Name:",
       "submit-button": "Save Article"
     }
+  },
+  "files": {
+    "header": "Tiedostot:",
+    "list-button": "Tiedostolista",
+    "add-button": "Lisää tiedostoja",
+    "add-file-input": "Lisää tiedostoja:",
+    "add-submit-button": "Lähetä tiedostot"
   }
 }
