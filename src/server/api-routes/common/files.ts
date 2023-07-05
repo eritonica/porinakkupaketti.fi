@@ -1,3 +1,4 @@
+import { unlink } from 'fs';
 import { ErrorHandler } from '../../core/errors';
 import { createRouter } from '../../core/server';
 import { confirmGroupPermission, confirmPermission, getGroup } from '../../lib/access/groups';
@@ -67,7 +68,11 @@ filesRouter.Delete('/api/files/:fileId', async (req, res) => {
     if (result !== "success") {
       return res.status(500).json({ result: 'error', message: "No permission" });
     }
-    await deleteFile(req.params?.['fileId']);
+    const { file } = await deleteFile(req.params?.['fileId']);
+    unlink(file.filepath!, (err) => {
+      if (err) throw err;
+      console.log(`${file.filepath} was deleted`);
+    });
     return res.status(200).json({ result: 'success', message: 'File deleted successfully.' });
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
