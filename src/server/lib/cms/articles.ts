@@ -47,7 +47,6 @@ export const createArticle = async (
   } else {
     throw new Error("Could not save article.")
   }
-
 }
 
 /**

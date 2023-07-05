@@ -35,7 +35,6 @@ mongoose.connect(process.env.ATLAS_URI!, {
   ssl: true,
 });
 
-
 // Create a router
 const router = createRouter();
 
@@ -46,17 +45,11 @@ router.Middleware(cors(process.env.ORIGINS!, 'GET, POST, PUT, DELETE'));
 router.Middleware(assets(process.env.PUBLIC!));
 
 // Handle multipart/form-data file uploading.
-router.Middleware(upload(`./build/public`));
+router.Middleware(upload(`./build/public/files`));
 
 // Use Router from another module.
 router.UseRouter(APIRouter);
 
-router.Post('/api/upload', (req, res) => {
-  // Access the uploaded files through req.files
-  console.log(req.parts);
-  // Since the file upload was handled globally by middleware send a response.
-  res.status(200).json({ result: "success", files: req.files });
-});
 
 router.Get("*", (req, res) => {
   const helmetContext: HelmetContext = {};
