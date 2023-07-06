@@ -80,6 +80,33 @@ export const listFilesByAuthor = async (author: AccountsDTO): Promise<FilesResul
   }
 };
 
+
+/**
+ * Lists files by domain.
+ *
+ * @param domain - The domain to retrieve files for.
+ * @returns A Promise that resolves to a FilesResultDTO.
+ * @throws An error if no files are found for the specified domain.
+ */
+export const listFilesByDomain = async (group: GroupsDTO, domain: AccountsDTO): Promise<FilesResultDTO> => {
+  console.log(domain);
+  const files = await filesSchema.find({ group: group._id, domain: domain }).exec();
+  if (files) {
+    return { result: "success", message: "Files retrieved successfully.", files: files };
+  } else {
+    throw new Error("No files found for the specified domain.");
+  }
+};
+
+export const getFile = async (fid): Promise<FileResultDTO> => {
+  const file = await filesSchema.findById(fid).exec();
+  if (file) {
+    return { result: "success", message: "Files retrieved successfully.", file: file };
+  } else {
+    throw new Error("No files found for the specified domain.");
+  }
+}
+
 /**
  * Lists files by group.
  *

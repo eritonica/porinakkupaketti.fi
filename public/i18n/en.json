@@ -43,10 +43,11 @@
     }
   },
   "files": {
-    "header": "Tiedostot:",
-    "list-button": "Tiedostolista",
-    "add-button": "Lisää tiedostoja",
-    "add-file-input": "Lisää tiedostoja:",
-    "add-submit-button": "Lähetä tiedostot"
+    "header": "Files:",
+    "list-button": "Files",
+    "add-button": "Add files",
+    "add-file-input": "Add files:",
+    "add-submit-button": "Send files",
+    "delete-file-button": "Delete file"
   }
 }

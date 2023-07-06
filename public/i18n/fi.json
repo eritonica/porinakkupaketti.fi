@@ -41,5 +41,13 @@
       "header": "Nimi:",
       "submit-button": "Tallenna"
     }
+  },
+  "files": {
+    "header": "Tiedostot:",
+    "list-button": "Tiedostolista",
+    "add-button": "Lisää tiedostoja",
+    "add-file-input": "Lisää tiedostoja:",
+    "add-submit-button": "Lähetä tiedostot",
+    "delete-file-button": "Poista tiedosto"
   }
 }
