@@ -11,7 +11,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
 // import { Transform } from 'stream';
 import { replaceHeadTags } from './core/seo';
-import { ErrorHandler } from './core/errors';
+import { DEBUG, ErrorHandler } from './core/errors';
 import { cors } from './core/cors';
 import { HelmetContext } from './core/types';
 import { createRouter, createServer, listen } from './core/server';
@@ -28,7 +28,7 @@ import Cryptology from './lib/common/Cryptology';
 import { generatePreloadTags } from './core/preload';
 
 const generatePassword = async () => {
-  console.log(Cryptology.encrypt("hoosat-template-working??"))
+  DEBUG.log(Cryptology.encrypt("hoosat-template-working??"))
 }
 generatePassword();
 
@@ -60,7 +60,7 @@ router.Get("*", (req, res) => {
   if(process.env.NODE_ENV === "development") {
     preloadTags = generatePreloadTags('./build/public', '/');
   } else {
-    preloadTags = generatePreloadTags('/home/marko/porinakkupaketti.fi/build/public', '/');
+    preloadTags = generatePreloadTags(process.env.PRELOAD_TAG_FOLDER!, '/');
   }
 
   const replaceStream = replaceHeadTags({
@@ -103,7 +103,7 @@ router.Get("*", (req, res) => {
         stream.pipe(replaceStream).pipe(res)
       },
       onShellError(error) {
-        console.log(error);
+        console.error(error);
         res.status(500).send("onShellError");
         ErrorHandler(error);
       },
@@ -122,5 +122,5 @@ const server = createServer(router);
 // Start listening on port 8080
 const port = parseInt(process.env.PORT || "8080");
 listen(server, port, () => {
-  console.log(`Server is running on port ${port}`);
+  DEBUG.log(`Server is running on port ${port}`);
 });

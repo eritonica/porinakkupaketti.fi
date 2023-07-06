@@ -3,6 +3,7 @@ import { OAuth2Client } from "google-auth-library";
 import { authenticate, confirmToken, googleAuthenticate } from "../../lib/access/sessions";
 import { activateAccount, createAccount, sendActivationLink } from "../../lib/access/accounts";
 import { createRouter } from "../../core/server";
+import { DEBUG } from "../../core/errors";
 
 /**
  * 
@@ -32,7 +33,7 @@ authenticationRouter.Post("/api/authentication/authenticate", async (req, res) =
     const authentication = await authenticate(req.body.credentials)
     return res.status(200).json(authentication);
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -67,7 +68,7 @@ authenticationRouter.Post("/api/authentication/google", async (req, res) => {
     }
     return res.status(200).json(await googleAuthenticate(payload));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -94,7 +95,7 @@ authenticationRouter.Post("/api/authentication/confirm", async (req, res) => {
     const result = await confirmToken(req.headers.authorization);
     return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -129,8 +130,8 @@ authenticationRouter.Post("/api/authentication/register", async (req, res) => {
     }
     return res.status(200).json({ result: "success", message: "Account created and activation email has been sent.", account: account });
   } catch (error) {
-    console.log(error);
-    console.log(error);
+    DEBUG.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -157,7 +158,7 @@ authenticationRouter.Get("/api/authentication/activate/:code", async (req, res) 
       return res.status(404).json({ result: "error", message: "Could not activate account with the code." });
     }
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {

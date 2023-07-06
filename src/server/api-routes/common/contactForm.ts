@@ -1,6 +1,7 @@
 import Mailer from '../../lib/common/Mailer';
 import { rateLimitByIP } from '../../lib/common/rateLimit';
 import { createRouter } from '../../core/server';
+import { DEBUG } from '../../core/errors';
 
 const contactFormRouter = createRouter();
 
@@ -13,7 +14,7 @@ contactFormRouter.Post("/api/contact/email", async (req, res) => {
     }
     return res.status(200).json({ result: "success", message: "Contact request has been sent."})
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {

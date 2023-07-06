@@ -5,6 +5,11 @@ import { resolve as _resolve } from "path";
 import webpack from 'webpack';
 //import nodeExternals from "webpack-node-externals";
 
+// Function to check if the current mode is production
+function isProductionMode() {
+  return process.env.NODE_ENV === "production";
+}
+
 // Export the configuration object
 export default {
   // Set the source map type to "source-map" for easier debugging
@@ -77,6 +82,7 @@ export default {
     new webpack.DefinePlugin({
       '__filename': false,
       '__dirname': false
-    })
+    }),
+    isProductionMode() ? new webpack.IgnorePlugin(/DEBUG\.log/) : undefined,
   ],
 };

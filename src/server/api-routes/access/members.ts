@@ -4,6 +4,7 @@ import { getAccount } from '../../lib/access/accounts';
 import { confirmToken } from '../../lib/access/sessions';
 import mongoose from 'mongoose';
 import { createRouter } from '../../core/server';
+import { DEBUG } from '../../core/errors';
 
 /**
  * Members
@@ -35,7 +36,7 @@ membersRouter.Get("/api/members/", async (req, res) => {
     }
     return res.status(200).json(await addMember(account, group, req.body.rights)); 
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -65,7 +66,7 @@ membersRouter.Put("/api/members/", async (req, res) => {
     }
     return res.status(200).json(await updateMember(account, group, req.body.rights));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -97,7 +98,7 @@ membersRouter.Delete("/api/members/", async (req, res) => {
     const getAccountResult = await getAccount(req.body.account);
     return res.status(200).json(deleteMember(getAccountResult.account, group));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -126,7 +127,7 @@ membersRouter.Get("/api/members/group/:id", async (req, res) => {
     }
     return res.status(200).json(getMembersByGroup(group));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {

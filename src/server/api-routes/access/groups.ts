@@ -1,4 +1,5 @@
 
+import { DEBUG } from '../../core/errors';
 import { createRouter } from '../../core/server';
 import { 
   confirmGroupPermission,
@@ -38,7 +39,7 @@ groupsRouter.Post("/api/group/", async (req, res) => {
     const { account } = await confirmToken(req.headers.authorization);
     return res.status(201).json(await createGroup(req.body.group, account));
   } catch  (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -68,7 +69,7 @@ groupsRouter.Put("/api/group/", async (req, res) => {
     await confirmGroupPermission("WRITE", req.body.group, account);
     return res.status(200).json(await updateGroup(req.body.group, account));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -99,7 +100,7 @@ groupsRouter.Get("/api/groups/", async (req, res) => {
     }
     return res.status(200).json(await getGroups());
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -129,7 +130,7 @@ groupsRouter.Get("/api/group/:id", async (req, res) => {
     const groupId = new mongoose.Types.ObjectId(req.params?.['id']);
     return res.status(200).json(await getGroup(groupId));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     return res.status(500).json({ result: "error", message: error });
   }
 });
@@ -153,7 +154,7 @@ groupsRouter.Delete("/api/group/:id", async (req, res) => {
     }    
     return res.status(201).json(await deleteGroup(group, account));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {
@@ -185,7 +186,7 @@ groupsRouter.Get("/api/group/:id/members", async (req, res) => {
     }
     return res.status(200).json(await getMembersByGroup(group));
   } catch (error) {
-    console.log(error);
+    DEBUG.log(error);
     if (typeof error === "object" && error !== null) {
       return res.status(500).json({ result: "error", message: error.toString() });
     } else {

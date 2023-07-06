@@ -27,7 +27,7 @@
 import { confirmPermission } from "../../lib/access/groups";
 import { createPage, deletePage, getPage, getPageByLink, getPagesByDomain, updatePage } from "../../lib/cms/pages";
 import { confirmToken } from "../../lib/access/sessions";
-import { ErrorHandler } from "../../core/errors";
+import { DEBUG, ErrorHandler } from "../../core/errors";
 import { createRouter } from "../../core/server";
 
 
@@ -117,7 +117,7 @@ pagesRouter.Delete("/api/pages/:id", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/link/:link", async (req, res) => {
   try {
-    console.log(req.params?.['link']);
+    DEBUG.log(req.params?.['link']);
     return res.status(200).json(await getPageByLink(req.params?.['link']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
@@ -137,8 +137,8 @@ pagesRouter.Get("/api/pages/link/:link", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/domain/:domain/link/:link", async (req, res) => {
   try {
-    console.log("Domain: ", req.params?.['domain']);
-    console.log("Link: ", req.params?.['link']);
+    DEBUG.log("Domain: ", req.params?.['domain']);
+    DEBUG.log("Link: ", req.params?.['link']);
     if(req.params?.['domain'] === undefined) {
       return res.status(500).json({ result: "error", message: "Domain was empty" });
     }
