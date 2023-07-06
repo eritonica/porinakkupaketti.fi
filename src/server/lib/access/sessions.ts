@@ -2,6 +2,7 @@ import { TokenPayload } from "google-auth-library";
 import Cryptology from "../common/Cryptology";
 import accountsSchema, { AccountsDTO } from "../schemas/accountsSchema";
 import sessionsSchema, { SessionsDTO } from "../schemas/sessionsSchema";
+import { DEBUG } from "../../core/errors";
 
 export interface AuthenticateDTO {
   email: string;
@@ -31,7 +32,7 @@ export const authenticate = async (props: AuthenticateDTO): Promise<AuthenticatR
     account = await accountsSchema.findOne({ applications: { $in: [application] } }).exec();
     method = "application";
   }
-  console.log(account);
+  DEBUG.log(account);
   if (account === null || account === undefined) {
     throw new Error("Failed to fetch account from accountsSchema with the provided information.");
   }
@@ -100,7 +101,7 @@ export const confirmToken = async (
     throw new Error("Session could not be found.");
   }
   let account = await accountsSchema.findOne({ _id: session.account }).exec();
-  console.log(account);
+  DEBUG.log(account);
   if(account === null || account === undefined) {
     throw new Error("Could not find the account for the session.");
   }

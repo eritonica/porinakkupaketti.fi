@@ -33,6 +33,7 @@ deployable.push(server.builder.toJSON());
 commands.push({name: server.builder.name, execute: server.execute});
 
 import fkick from './commands/fkick';
+import { DEBUG } from '../../core/errors';
 deployable.push(fkick.builder.toJSON());
 commands.push({name: fkick.builder.name, execute: fkick.execute});
 
@@ -40,12 +41,12 @@ commands.push({name: fkick.builder.name, execute: fkick.execute});
 export const loginDiscord = (): Client | boolean => {
   const token = process.env.DISCORD_BOT_TOKEN;
   if(token === undefined) {
-    console.log("Discord bot token has not been set.");
+    DEBUG.log("Discord bot token has not been set.");
   } else {
     deployCommands(deployable);
     const client = new Client({ intents: [GatewayIntentBits.Guilds]});
     client.once(Events.ClientReady, (c) => {
-      console.log(`Logged in as ${c.user.tag}`);
+      DEBUG.log(`Logged in as ${c.user.tag}`);
     });
     client.on(Events.InteractionCreate, async (interaction) => {
       if(!interaction.isChatInputCommand()) return;
@@ -54,7 +55,7 @@ export const loginDiscord = (): Client | boolean => {
           try {
             await command.execute(interaction);
           } catch (error) {
-            console.log(error);
+            DEBUG.log(error);
             if(interaction.replied || interaction.deferred) {
               await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
             } else {

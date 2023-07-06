@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import commentsSchema, { CommentTargetComment, CommentsDTO, PageTargetComment, PostTargetComment } from "../schemas/commentsSchema";
 import { GroupResultDTO, getGroup } from "../access/groups";
+// import { DEBUG } from "../../core/errors";
 
 export interface CommentResultDTO {
   result: string,
@@ -33,7 +34,7 @@ export interface CommentsResultDTO {
  *   updatedAt: new Date(),
  * };
  * const result = await createComment(comment);
- * console.log(result);
+ * DEBUG.log(result);
  */
 export const createComment = async (
   comment: CommentsDTO,

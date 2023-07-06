@@ -1,3 +1,4 @@
+import { DEBUG } from "../../core/errors"
 import { AccountsDTO } from "../schemas/accountsSchema"
 import filesSchema, { FilesDTO } from "../schemas/filesSchema"
 import { GroupsDTO } from "../schemas/groupsSchema"
@@ -89,7 +90,7 @@ export const listFilesByAuthor = async (author: AccountsDTO): Promise<FilesResul
  * @throws An error if no files are found for the specified domain.
  */
 export const listFilesByDomain = async (group: GroupsDTO, domain: AccountsDTO): Promise<FilesResultDTO> => {
-  console.log(domain);
+  DEBUG.log(domain);
   const files = await filesSchema.find({ group: group._id, domain: domain }).exec();
   if (files) {
     return { result: "success", message: "Files retrieved successfully.", files: files };

@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { DEBUG } from "../../core/errors";
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -24,7 +25,7 @@ interface MailOptions {
 const sendMail = async(from: string, to: string, subject: string, text: string): Promise<any> => {
   const type = process.env.EMAIL_SERVER_TYPE;
   if(process.env.EMAIL_SERVER_TYPE === undefined) {
-    console.log("EMAIL_SERVER_TYPE has not been set in environment");
+    DEBUG.log("EMAIL_SERVER_TYPE has not been set in environment");
     return;
   }
   if(type === "service") {

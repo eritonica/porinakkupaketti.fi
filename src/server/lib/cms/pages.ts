@@ -1,5 +1,6 @@
 "use strict";
 
+import { DEBUG } from "../../core/errors";
 import { AccountsDTO } from "../schemas/accountsSchema";
 import { GroupsDTO } from "../schemas/groupsSchema";
 import pagesSchema, { PagesDTO } from "../schemas/pagesSchema";
@@ -107,7 +108,7 @@ export const deletePage = async (id: string): Promise<PageResultDTO> => {
  * @returns {Promise<PageResultDTO>} - A promise that resolves to PageResultDTO
  */
 export const getPage = async (id: string): Promise<PageResultDTO> => {
-  console.log("id: ", id);
+  DEBUG.log("id: ", id);
   const page = await pagesSchema.findOne({ _id: id }).exec();
   if (page) {
     return { result: "success", message: "Page has been found.", page: page };
@@ -124,7 +125,7 @@ export const getPage = async (id: string): Promise<PageResultDTO> => {
  * @returns {Promise<PageResultDTO>} - A promise that resolves to PageResultDTO
  */
 export const getPageByLink = async (link: string): Promise<PageResultDTO> => {
-  console.log("link: " + link);
+  DEBUG.log("link: " + link);
   const page = await pagesSchema.findOne({ link: `/${link}` }).exec();
   if (page) {
     return { result: "success", message: "Page has been found.", page: page };
