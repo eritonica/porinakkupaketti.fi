@@ -18,14 +18,17 @@ import { createRouter, createServer, listen } from './core/server';
 import { assets } from './core/assets';
 import { upload } from './core/upload';
 import { APIRouter } from './api-routes';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+dotenv.config();
 
 // generate password.
 import Cryptology from './lib/common/Cryptology';
 import { generatePreloadTags } from './core/preload';
 
 const generatePassword = async () => {
-  console.log(await Cryptology.encrypt("hoosat-template-working??"))
+  console.log(Cryptology.encrypt("hoosat-template-working??"))
 }
 generatePassword();
 
