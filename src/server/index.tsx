@@ -1,15 +1,11 @@
-// Importing necessary modules and components
-// import express, { Request, Response } from "express";
-//import cors  from "cors";
 import React from 'react';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import Cryptology from './lib/common/Cryptology';
 import App from '../client/App';
 import { renderToPipeableStream } from 'react-dom/server';
-// import App from '../client/App';
 import { StaticRouter } from 'react-router-dom/server';
-// import { APIRoutes } from './api-routes';
-// import { ErrorHandler } from './core/express-errors';
 import { HelmetProvider } from 'react-helmet-async';
-// import { Transform } from 'stream';
 import { replaceHeadTags } from './core/seo';
 import { DEBUG, ErrorHandler } from './core/errors';
 import { cors } from './core/cors';
@@ -18,14 +14,13 @@ import { createRouter, createServer, listen } from './core/server';
 import { assets } from './core/assets';
 import { upload } from './core/upload';
 import { APIRouter } from './api-routes';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+import { generatePreloadTags } from './core/preload';
+import { analytics } from './core/analytics';
+import analyticsSchema from './lib/schemas/analyticsSchema';
 
 dotenv.config();
 
 // generate password.
-import Cryptology from './lib/common/Cryptology';
-import { generatePreloadTags } from './core/preload';
 
 const generatePassword = async () => {
   DEBUG.log(Cryptology.encrypt("hoosat-template-working??"))
@@ -38,8 +33,16 @@ mongoose.connect(process.env.ATLAS_URI!, {
   ssl: true,
 });
 
+
 // Create a router
 const router = createRouter();
+
+router.Middleware(analytics(async (analyticsData) => {
+  DEBUG.log(analyticsData);
+  const analytics = new analyticsSchema(analyticsData);
+  const result = await analytics.save();
+  DEBUG.log(result);
+}));
 
 // Define routes and middleware
 router.Middleware(cors(process.env.ORIGINS!, 'GET, POST, PUT, DELETE'));
