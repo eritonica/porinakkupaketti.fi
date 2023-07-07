@@ -1,7 +1,7 @@
 import { TokenPayload } from "google-auth-library";
 import Cryptology from "../common/Cryptology";
-import accountsSchema, { AccountsDTO } from "../schemas/accountsSchema";
-import sessionsSchema, { SessionsDTO } from "../schemas/sessionsSchema";
+import accountsSchema, { AccountsDTO } from "./schemas/accountsSchema";
+import sessionsSchema, { SessionsDTO } from "./schemas/sessionsSchema";
 import { DEBUG } from "../../core/errors";
 
 export interface AuthenticateDTO {

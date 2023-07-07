@@ -38,7 +38,6 @@ mongoose.connect(process.env.ATLAS_URI!, {
 const router = createRouter();
 
 router.Middleware(analytics(async (analyticsData) => {
-  DEBUG.log(analyticsData);
   const analytics = new analyticsSchema(analyticsData);
   const result = await analytics.save();
   DEBUG.log(result);

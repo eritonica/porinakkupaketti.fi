@@ -5,6 +5,7 @@ export interface AnalyticsDTO {
   element?: string;
   event?: string;
   method?: string;
+  type?: string;
   url: string;
   refererr: string;
   userAgent: string;
@@ -29,6 +30,9 @@ const analyticsSchema: Schema<AnalytiscDBO> = new Schema({
     type: String,
   },
   method: {
+    type: String,
+  },
+  type: {
     type: String,
   },
   url: {

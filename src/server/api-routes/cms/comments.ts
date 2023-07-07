@@ -2,7 +2,7 @@
 import { ErrorHandler } from '../../core/errors';
 import { confirmToken } from '../../lib/access/sessions';
 import { CommentResultDTO, createComment, getCommentGroupId, updateComment } from '../../lib/cms/comments';
-import { CommentsDTO } from '../../lib/schemas/commentsSchema';
+import { CommentsDTO } from '../../lib/cms/schemas/commentsSchema';
 import { confirmGroupPermission } from '../../lib/access/groups';
 import { createRouter } from '../../core/server';
 

@@ -1,6 +1,6 @@
-import { AccountsDTO } from "../schemas/accountsSchema";
-import articlesSchema, { ArticlesDTO } from "../schemas/articlesSchema";
-import { GroupsDTO } from "../schemas/groupsSchema";
+import { AccountsDTO } from "../access/schemas/accountsSchema";
+import articlesSchema, { ArticlesDTO } from "./schemas/articlesSchema";
+import { GroupsDTO } from "../access/schemas/groupsSchema";
 
 
 interface ArticleResultDTO {

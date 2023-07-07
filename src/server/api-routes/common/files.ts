@@ -4,7 +4,7 @@ import { createRouter } from '../../core/server';
 import { confirmGroupPermission, confirmPermission, getGroup } from '../../lib/access/groups';
 import { confirmToken } from '../../lib/access/sessions';
 import { createFile, deleteFile, listFilesByGroup, listFilesByAuthor, listFilesByDomain, getFile } from '../../lib/common/files';
-import { FilesDTO } from '../../lib/schemas/filesSchema';
+import { FilesDTO } from '../../lib/common/schemas/filesSchema';
 
 const filesRouter = createRouter();
 

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import commentsSchema, { CommentTargetComment, CommentsDTO, PageTargetComment, PostTargetComment } from "../schemas/commentsSchema";
+import commentsSchema, { CommentTargetComment, CommentsDTO, PageTargetComment, PostTargetComment } from "./schemas/commentsSchema";
 import { GroupResultDTO, getGroup } from "../access/groups";
 // import { DEBUG } from "../../core/errors";
 

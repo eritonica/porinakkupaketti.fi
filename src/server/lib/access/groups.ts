@@ -1,8 +1,8 @@
 
 import mongoose from "mongoose";
-import { AccountsDTO } from "../schemas/accountsSchema";
-import groupsSchema, { GroupsDTO } from "../schemas/groupsSchema";
-import membersSchema, { MembersDTO } from "../schemas/membersSchema";
+import { AccountsDTO } from "./schemas/accountsSchema";
+import groupsSchema, { GroupsDTO } from "./schemas/groupsSchema";
+import membersSchema, { MembersDTO } from "./schemas/membersSchema";
 
 export interface confirmGroupResultDTO {
   result: string;

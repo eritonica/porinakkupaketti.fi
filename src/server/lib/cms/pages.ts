@@ -1,9 +1,9 @@
 "use strict";
 
 import { DEBUG } from "../../core/errors";
-import { AccountsDTO } from "../schemas/accountsSchema";
-import { GroupsDTO } from "../schemas/groupsSchema";
-import pagesSchema, { PagesDTO } from "../schemas/pagesSchema";
+import { AccountsDTO } from "../access/schemas/accountsSchema";
+import { GroupsDTO } from "../access/schemas/groupsSchema";
+import pagesSchema, { PagesDTO } from "./schemas/pagesSchema";
 
 /**
  * @author: Toni Lukkaroinen

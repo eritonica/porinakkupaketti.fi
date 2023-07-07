@@ -1,7 +1,7 @@
 import { DEBUG } from "../../core/errors"
-import { AccountsDTO } from "../schemas/accountsSchema"
-import filesSchema, { FilesDTO } from "../schemas/filesSchema"
-import { GroupsDTO } from "../schemas/groupsSchema"
+import { AccountsDTO } from "../access/schemas/accountsSchema"
+import filesSchema, { FilesDTO } from "./schemas/filesSchema"
+import { GroupsDTO } from "../access/schemas/groupsSchema"
 
 
 interface FileResultDTO {
