@@ -16,15 +16,19 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Page } from './Routes/Page';
 import { Admin } from './HoosatCMS-client';
+import { Compliance } from './Components/Compliance';
 
 
 export default function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<Page />} />
       <Route path="/:page" element={<Page />} />
       <Route path="/hoosatcms" element={<Admin />} />
       <Route path="/hoosatcms/:page" element={<Admin />} />
     </Routes>
+    <Compliance fixVWScrollbar={true}></Compliance>
+    </>
   );
 }

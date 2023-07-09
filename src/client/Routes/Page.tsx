@@ -19,12 +19,16 @@ export const Page = () => {
           <Nav></Nav>
         </Suspense>
       }
-      sidebar={<Sidebar></Sidebar>}
-      footer={<Footer></Footer>}
+      sidebar={
+        <Sidebar></Sidebar>
+      }
+      footer={
+        <Footer></Footer>
+      }
       body={
-          <Suspense fallback={<progress value={undefined} />}>
-            <Contents></Contents>
-          </Suspense>
+        <Suspense fallback={<progress value={undefined} />}>
+          <Contents></Contents>
+        </Suspense>
       }
     />
   );

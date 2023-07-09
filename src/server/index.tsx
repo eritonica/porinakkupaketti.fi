@@ -30,7 +30,6 @@ generatePassword();
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.ATLAS_URI!, {
   autoIndex: true,
-  ssl: true,
 });
 
 

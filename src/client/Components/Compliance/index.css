@@ -1,0 +1,86 @@
+.yesno {
+  background-color:#f0ffff;
+  display: inline-block;
+  line-height: 5;
+  border-radius: 10px;
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  background-color: #7b8f94;
+}
+
+.yesno:hover {
+  background-color:#f0ffff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+}
+
+.yesno {
+  background-color:#f0ffff;
+  border: 1px solid #cbd5e0;
+}
+
+.yesno::placeholder {
+  color: #a0aec0;
+}
+
+.yesno:focus {
+  outline: none;
+}
+
+@media (min-width: 640px) {
+  .yesno {
+    font-size: 0.875rem;
+    line-height: 5;
+  }
+}
+
+#inputs {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+#saveButton {
+  display: block;
+  border-radius: 0.375rem; /* assuming 1rem = 16px */
+  background-color: #e98c1b;
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e2e8f0;
+  color: #1a202c;
+  font-size: 0.875rem; /* assuming 1rem = 16px */
+  line-height: 1.25; /* 5/4 to match a leading of 5 */
+  padding: 0.5rem 1rem; /* adjust as needed */
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#saveButton:hover {
+  background-color: #eb9834;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+}
+
+.FixedBottomRight {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 100000;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.fixedBottomLeft {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
