@@ -52,7 +52,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <FormBuilder submitbuttontext={submitButtonText} header="Selostus" inputs={[
+    <FormBuilder submitbuttontext={submitButtonText} header="Ota yhteyttä" inputs={[
       { 
         itype: "input", 
         id: "email", 
@@ -66,7 +66,7 @@ export const Sidebar = () => {
       {
         itype: "textarea",
         id: "message",
-        label: "Selvitys huoltopyynnöstä",
+        label: "Selostus",
         placeholder: "Kerro jos sinulla on huoltotarvetta, tilaukseen liittyvää asiaa tai palautetta.",
         style: { height: "330px"},
         variant: "primary",

@@ -36,6 +36,10 @@ export default {
   experiments: {
     outputModule: true,
   },
+  optimization: {
+    minimize: true,
+    usedExports: true,
+  },
   // Specify the module loaders and rules
   module: {
     rules: [
@@ -79,6 +83,5 @@ export default {
       '__dirname': false
     }),
     new webpack.EnvironmentPlugin(filteredEnv), // Use the filtered environment object
-  
   ]
 };

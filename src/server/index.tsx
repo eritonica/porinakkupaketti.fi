@@ -17,46 +17,64 @@ import { APIRouter } from './api-routes';
 import { generatePreloadTags } from './core/preload';
 import { analytics } from './core/analytics';
 import analyticsSchema from './lib/schemas/analyticsSchema';
+import { extractCssFrom } from './core/cssExtractor';
+import { compressFiles } from './core/compress';
 
 dotenv.config();
 
 // generate password.
 
 const generatePassword = async () => {
-  DEBUG.log(Cryptology.encrypt("hoosat-template-working??"))
+  console.log(Cryptology.encrypt("hoosat-template-working??"))
 }
 generatePassword();
+
+if (process.env.STATIC_COMPRESSION === "true") {
+  console.log("Start compressing build files.");
+  compressFiles("./build/public", "br");
+  compressFiles("./build/public", "delate");
+  compressFiles("./build/public", "gzip");
+  console.log("Files have been compressed.");
+}
+
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.ATLAS_URI!, {
   autoIndex: true,
 });
 
+console.log("Mongoose connected.");
 
 // Create a router
 const router = createRouter();
+console.log("Server router created.");
 
 router.Middleware(analytics(async (analyticsData) => {
   const analytics = new analyticsSchema(analyticsData);
-  const result = await analytics.save();
-  DEBUG.log(result);
+  await analytics.save();
 }));
+console.log("Analytics middleware added.");
 
 // Define routes and middleware
 router.Middleware(cors(process.env.ORIGINS!, 'GET, POST, PUT, DELETE'));
+console.log("Cors middleware added.");
 
 // Serve static files from the "public" directory.
-router.Middleware(assets(process.env.PUBLIC!));
+router.Middleware(assets(process.env.PUBLIC!, (process.env.STATIC_COMPRESSION === "true") ? true : false));
+console.log("Assets middleware added.");
 
 // Handle multipart/form-data file uploading.
 router.Middleware(upload(`./build/public/files`));
+console.log("Upload middleware added.");
 
 // Use Router from another module.
 router.UseRouter(APIRouter);
+console.log("APIRouter added.");
 
 
 router.Get("*", (req, res) => {
   const helmetContext: HelmetContext = {};
+  const css = extractCssFrom("./src/client");
   let preloadTags: string[];
   if(process.env.NODE_ENV === "development") {
     preloadTags = generatePreloadTags('./build/public', '/');
@@ -70,7 +88,7 @@ router.Get("*", (req, res) => {
     link: preloadTags.join("\n") + (helmetContext.helmet?.link?.toString() || ''),
     script: helmetContext.helmet?.script?.toString() || '',
     base: helmetContext.helmet?.base?.toString() || '',
-    style: helmetContext.helmet?.style?.toString() || '',
+    style: css + helmetContext.helmet?.style?.toString() || '',
   });
 
   // Rendering the App component to a pipeable stream
@@ -78,14 +96,13 @@ router.Get("*", (req, res) => {
     <React.StrictMode>
       <HelmetProvider context={helmetContext}>
         <html lang="FI-fi">
-          <head >
+          <head>
             <meta charSet="utf-8" />
             <title>Porin Akkupaketti</title>
             <meta name="description" content="Porin Akkupaketti, teemme pienakkujen huoltamista ja kierrätämme niitä. Porin Akkupaketti (c) MTH-TEK tmi, Author: Hoosat Oy, Designer: Toni Lukkaroinen" />
             <link rel="icon" href="/logo/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="manifest" href="/manifest.json" />
-            <link rel="stylesheet" href="styles.css" />
           </head>
           <body>
             {/* Mounting the App component inside the StaticRouter */}
@@ -99,10 +116,10 @@ router.Get("*", (req, res) => {
       </HelmetProvider>
     </React.StrictMode>,
     {
-      bootstrapScripts: ['/bundle.js'],
-      onShellReady: async () => {
+      bootstrapModules: ["/bundle.js"],
+      onShellReady: () => {
         res.setHeader('content-type', 'text/html');
-        stream.pipe(replaceStream).pipe(res)
+        stream.pipe(replaceStream).pipe(res);
       },
       onShellError(error) {
         console.error(error);
