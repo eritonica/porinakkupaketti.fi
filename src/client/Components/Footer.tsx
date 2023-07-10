@@ -8,9 +8,9 @@ export const Footer = () => {
     <Flex style={{flexDirection: "column", justifyContent: "center", alignItems: "center", alignContent: "center"}}>
       <List style={{ textAlign: "center"}}>
         <ListItem>Copyright © MTH-TEK 2023</ListItem>
-        <ListItem>Y-tunnus: 2441864-7</ListItem>
-        <ListItem>Puhelin: <Anchor href="tel:040 5913008">040 5913008</Anchor></ListItem>
-        <ListItem>Site design by <Anchor href="https://hoosat.fi" style={{padding: "0px"}}>Hoosat Oy</Anchor></ListItem>
+        <ListItem><Anchor href="https://tietopalvelu.ytj.fi/yritys/2441864-7" style={{padding: "0px"}}>Y-tunnus: 2441864-7</Anchor></ListItem>
+        <ListItem><Anchor href="tel:040 5913008" style={{padding: "0px"}}>Puhelin: 040 5913008</Anchor></ListItem>
+        <ListItem><Anchor href="https://hoosat.fi" style={{padding: "0px"}}>Site design by Hoosat Oy</Anchor></ListItem>
         <ListItem><Link to="/hoosatcms">CMS</Link></ListItem>
       </List>
     </Flex>

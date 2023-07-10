@@ -52,7 +52,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <FormBuilder submitbuttontext={submitButtonText} header="Huoltotilaus" inputs={[
+    <FormBuilder submitbuttontext={submitButtonText} header="Selostus" inputs={[
       { 
         itype: "input", 
         id: "email", 
@@ -67,7 +67,7 @@ export const Sidebar = () => {
         itype: "textarea",
         id: "message",
         label: "Selvitys huoltopyynnöstä",
-        placeholder: "Kirjoita mahdollisimman selkeästi millainen ongelma laitteesi kanssa on.",
+        placeholder: "Kerro jos sinulla on huoltotarvetta, tilaukseen liittyvää asiaa tai palautetta.",
         style: { height: "330px"},
         variant: "primary",
         onChange: (e: React.BaseSyntheticEvent) => { setMaintenanceForm({...maintenanceForm,  message: e.target.value })  }, 

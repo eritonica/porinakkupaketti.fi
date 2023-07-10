@@ -145,6 +145,8 @@ a {
 
 
 .website > .content > .Flex > .gfm > table {
+  min-width: 970px;
+  overflow-x: scroll;
   margin-bottom: 10px;
   border: 1px solid #F5F5F5 !important;
   width: 100%;
@@ -153,8 +155,10 @@ a {
 
 .website > .content > .Flex > .gfm th,
 .website > .content > .Flex > .gfm td  {
+  overflow-x: auto;
   padding: 10px;
   border: 1px solid #F5F5F5;
+  min-width: fit-content;
 }
 
 .website > .sidebar h2 {

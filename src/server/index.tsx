@@ -85,6 +85,7 @@ router.Get("*", (req, res) => {
             <link rel="icon" href="/logo/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="manifest" href="/manifest.json" />
+            <link rel="stylesheet" href="styles.css" />
           </head>
           <body>
             {/* Mounting the App component inside the StaticRouter */}

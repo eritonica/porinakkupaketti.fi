@@ -1,4 +1,6 @@
 // webpack.server.config.js
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
 
 // Import the "resolve" method from the "path" module
 import { resolve as _resolve } from "path";
@@ -46,6 +48,10 @@ export default {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader',
         type: 'javascript/auto',
@@ -82,6 +88,9 @@ export default {
     new webpack.DefinePlugin({
       '__filename': false,
       '__dirname': false
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'public/styles.css', // Specify the output filename for the extracted CSS
     }),
   ],
 };
