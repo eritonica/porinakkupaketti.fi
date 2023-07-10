@@ -55,7 +55,7 @@ export const sendActivationLink = async (
   message += `Voit aktivoida käyttäjätunnuksesi osoitteessa:\r\n`;
   message += `https://hoosat.fi/activate/${activationCode}\r\n\r\n`;
   message += "Ystävällisin terveisin,\r\n\r\nHoosat Oy";
-  return await Mailer.sendMail("authentication@hoosat.fi", email, subject, message);
+  return await Mailer.sendMail({ from: "authentication@hoosat.fi", to: email, subject: subject, text: message });
 }
 
 export const activateAccount = async (

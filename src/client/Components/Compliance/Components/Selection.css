@@ -1,5 +1,5 @@
 #Selection {
-  width: calc(100vw - 10px);
+  width: calc(100vw - 2vw);
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;

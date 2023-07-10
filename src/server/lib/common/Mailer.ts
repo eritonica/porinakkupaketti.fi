@@ -20,28 +20,23 @@ interface MailOptions {
   to: string;
   subject: string;
   text: string;
+  cc?: string;
+  bcc?: string;
+  sender?: string;
+  replyTo?: string;
+  inReplyTo?: string;
 }
 
-const sendMail = async(from: string, to: string, subject: string, text: string): Promise<any> => {
+const sendMail = async(options: MailOptions): Promise<any> => {
   const type = process.env.EMAIL_SERVER_TYPE;
   if(process.env.EMAIL_SERVER_TYPE === undefined) {
     DEBUG.log("EMAIL_SERVER_TYPE has not been set in environment");
     return;
   }
   if(type === "service") {
-    ServiceSendMail({
-      from: from,
-      to: to,
-      subject: subject,
-      text: text,
-    });
+    ServiceSendMail(options);
   } else if(type === "smtp") {
-    SMTPSendMail({
-      from: from,
-      to: to,
-      subject: subject,
-      text: text,
-    });
+    SMTPSendMail(options);
   }
 }
 
@@ -61,8 +56,8 @@ const ServiceSendMail = async (options: MailOptions): Promise<any> => {
   let transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
     auth: {
-      user: process.env.EMAIL_SERVICE_USERNAME,
-      pass: process.env.EMAIL_SERVICE_PASSWORD,
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
   try {

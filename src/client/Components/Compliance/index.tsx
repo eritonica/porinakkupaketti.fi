@@ -139,7 +139,11 @@ export const Compliance: React.FC<Props> = (props) => {
         necessaries: "false",
       };
       try {
-        selections = JSON.parse((savedSelections !== null && savedSelections !== undefined) ? savedSelections : "");
+        if(savedSelections === null) {
+          setSelection(!selection);
+        } else {
+          selections = JSON.parse(savedSelections);
+        }
       } catch (error) {
         console.error('Invalid JSON: ', savedSelections, error);
       }
@@ -197,10 +201,7 @@ export const Compliance: React.FC<Props> = (props) => {
     document.cookie = "selections_preference=true;sameSite=Strict";
     document.cookie = "selections_statistic=true;sameSite=Strict";
     document.cookie = "selections_marketing=true;sameSite=Strict";
-  }, [])
-
-
-  console.log(cookieLottie);
+  }, []);
 
   return (
         <div className="fixedBottomLeft">

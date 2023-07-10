@@ -32,6 +32,7 @@ export const Sidebar = () => {
       subject: process.env.REACT_APP_FORM_SUBJECT,
       text: maintenanceForm.message
     };
+    console.log(body);
     const fetchResult = await fetch(uri, {
       method: "POST",
       headers: {

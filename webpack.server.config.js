@@ -46,6 +46,11 @@ export default {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.json$/,
+        loader: 'json-loader',
+        type: 'javascript/auto',
+      },
+      {
         test: /\.(node|png|jpg|gif)$/,
         loader: 'file-loader',
         options: {

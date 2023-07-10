@@ -39,13 +39,11 @@ export default {
   // Specify the module loaders and rules
   module: {
     rules: [
-      // Use the "ts-loader" to transpile TypeScript files
       {
         test: /.(ts|tsx)$/,
         exclude: /node_modules/,
         use: ["ts-loader"],
       },
-      // Use the "style-loader" and "css-loader" to load CSS files
       {
         test: /.css$/i,
         use: ["style-loader", "css-loader"],
