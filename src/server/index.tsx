@@ -32,7 +32,7 @@ generatePassword();
 if (process.env.STATIC_COMPRESSION === "true") {
   console.log("Start compressing build files.");
   compressFiles("./build/public", "br");
-  compressFiles("./build/public", "delate");
+  compressFiles("./build/public", "deflate");
   compressFiles("./build/public", "gzip");
   console.log("Files have been compressed.");
 }
