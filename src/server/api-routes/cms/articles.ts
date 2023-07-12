@@ -5,10 +5,11 @@ import {
 import { 
   createArticle, 
   deleteArticle, 
-  getArticle, 
-  getArticlesByDomain, 
+  getArticlesByDomain,
   getArticlesByGroup, 
+  getPublicArticleByHeader, 
   getPublicArticles, 
+  getPublicArticlesByDomain, 
   publishArticle, 
   unpublishArticle, 
   updateArticle 
@@ -156,18 +157,10 @@ articlesRouter.Get("/api/articles/", async (_req, res) => {
   }
 });
 
-/**
- * Handles HTTP Get requests for getting article.
- * @function
- * @async
- * @param {object} req - The HTTP rquest object.
- * @param {object} res - The HTTP response object.
- * @returns {Object} The HTTP with status code and JSON object with result, message and article properties.
- * @throws {Object} The HTTP response with status code and error message.
- */
-articlesRouter.Get("/api/article/:id", async (req, res) => {
+
+articlesRouter.Get("/api/article/:header", async (req, res) => {
   try {
-    return res.status(200).json(await getArticle(req.params?.['id']));
+    return res.status(200).json(await getPublicArticleByHeader(req.params!['header']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -202,9 +195,26 @@ articlesRouter.Get("/api/articles/group/:id", async (req, res) => {
  * @returns {Object} The HTTP with status code and JSON object with result, message and article properties.
  * @throws {Object} The HTTP response with status code and error message.
  */
-articlesRouter.Get("/api/articles/domain/:id", async (req, res) => {
+articlesRouter.Get("/api/articles/public/domain/:domain", async (req, res) => {
   try {
-    return res.status(200).json(await getArticlesByDomain(req.params?.['id']));
+    return res.status(200).json(await getPublicArticlesByDomain(req.params?.['domain']));
+  } catch (error) {
+    return res.status(500).json(ErrorHandler(error));
+  }
+});
+
+/**
+ * Handles HTTP Get requests for getting article.
+ * @function
+ * @async
+ * @param {object} req - The HTTP rquest object.
+ * @param {object} res - The HTTP response object.
+ * @returns {Object} The HTTP with status code and JSON object with result, message and article properties.
+ * @throws {Object} The HTTP response with status code and error message.
+ */
+articlesRouter.Get("/api/articles/domain/:domain", async (req, res) => {
+  try {
+    return res.status(200).json(await getArticlesByDomain(req.params?.['domain']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }

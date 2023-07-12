@@ -84,8 +84,7 @@ filesRouter.Delete('/api/files/:fileId', async (req, res) => {
     }
     const deleted = await deleteFile(req.params?.['fileId']);
     unlink(deleted.file.filepath!, (err) => {
-      if (err) throw err;
-      DEBUG.log(`${deleted.file.filepath} was deleted`);
+      DEBUG.log(`${deleted.file.filepath} was deleted\r\n${err}`);
     });
     return res.status(200).json({ result: 'success', message: 'File deleted successfully.' });
   } catch (error) {

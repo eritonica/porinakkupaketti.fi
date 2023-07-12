@@ -9,7 +9,6 @@ import { Contents } from '../Components/Contents';
 import "./Page.css";
 
 export const Page = () => {
-  
 
   return (
     <PageBuilder className='website'

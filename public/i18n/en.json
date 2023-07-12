@@ -21,7 +21,7 @@
       "submit-button": "Save page",
       "error-message": "Error happened, try again.",
       "success-message": "Page has been saved, you can close this.",
-      "info-message": "/index is the link for landing page of the cms."
+      "info-message": "`/index` is reserved for website landing page and `/blog` is reserved for blog page."
     },
     "update-success-message": "Page update was success!"
   },

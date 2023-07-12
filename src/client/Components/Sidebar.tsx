@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { FormBuilder } from '../HoosatUI';
+import { useLocation } from 'react-router-dom';
+import { ArticlesArchive } from './ArticlesArchive';
 
+import './Sidebar.css';
 
 export const Sidebar = () => {
+  const location = useLocation();
 
   const [maintenanceForm, setMaintenanceForm] = useState({
     email: "",
@@ -52,7 +56,9 @@ export const Sidebar = () => {
   }
 
   return (
-    <FormBuilder submitbuttontext={submitButtonText} header="Ota yhteyttä" inputs={[
+    (location.pathname.startsWith("/blog")) 
+    ? <ArticlesArchive></ArticlesArchive>
+    : <FormBuilder submitbuttontext={submitButtonText} header="Ota yhteyttä" inputs={[
       { 
         itype: "input", 
         id: "email", 

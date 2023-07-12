@@ -3,6 +3,7 @@ import { Flex, Markdown } from '../HoosatUI';
 import { PageDTO } from '../HoosatCMS-client/src/@types';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { Article } from './Article';
 
 
 export const Contents = () => {
@@ -44,7 +45,10 @@ export const Contents = () => {
   useEffect(loadPageContent, [location, loadPageContent]);
   
   return (
-    <Flex>
+    (location.pathname.startsWith("/blog"))
+    ?
+      <Article></Article>
+    : <Flex>
       <Helmet>
         <title>{`Porin Akkupaketti - ${page?.name}`}</title>
         <meta name="description" content={page?.markdown?.substring(0, 30)} />

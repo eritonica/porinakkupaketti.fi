@@ -22,8 +22,6 @@ import { compressFiles } from './core/compress';
 
 dotenv.config();
 
-// generate password.
-
 const generatePassword = async () => {
   console.log(Cryptology.encrypt("hoosat-template-working??"))
 }
@@ -36,7 +34,6 @@ if (process.env.STATIC_COMPRESSION === "true") {
   compressFiles("./build/public", "gzip");
   console.log("Files have been compressed.");
 }
-
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.ATLAS_URI!, {
@@ -76,11 +73,13 @@ router.Get("*", (req, res) => {
   const helmetContext: HelmetContext = {};
   const css = extractCssFrom("./src/client");
   let preloadTags: string[];
+  //const seperator = "://";
   if(process.env.NODE_ENV === "development") {
-    preloadTags = generatePreloadTags('./build/public', '/');
+    preloadTags = generatePreloadTags('./build/public', "/");
   } else {
-    preloadTags = generatePreloadTags(process.env.PRELOAD_TAG_FOLDER!, '/');
+    preloadTags = generatePreloadTags(process.env.PRELOAD_TAG_FOLDER!, "/");
   }
+  
 
   const replaceStream = replaceHeadTags({
     title: helmetContext.helmet?.title?.toString() || '',

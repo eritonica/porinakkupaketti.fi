@@ -138,7 +138,7 @@ export const deleteArticle = async (
  */
 export const getPublicArticles = async (
 ): Promise<ArticlesResultDTO> => {
-  const articles = await articlesSchema.find({ public: true }).sort({ publishedAt: "desc" }).exec();
+  const articles = await articlesSchema.find({ publish: true }).sort({ publishedAt: "desc" }).exec();
   if(articles) {
     return { result: "success", message: "Articles found.", articles: articles };
   } else {
@@ -157,7 +157,7 @@ export const getPublicArticles = async (
 export const getPublicArticlesByDomain = async (
   domain: string,
 ): Promise<ArticlesResultDTO> => {
-  const articles = await articlesSchema.find({ public: true, domain: domain }).sort({ publishedAt: "desc" }).exec();
+  const articles = await articlesSchema.find({ publish: true, domain: domain }).sort({ publishedAt: "desc" }).exec();
   if(articles) {
     return { result: "success", message: "Articles found.", articles: articles };
   } else {
@@ -175,7 +175,7 @@ export const getPublicArticlesByDomain = async (
 export const getPublicArticlesByGroup = async (
   group: GroupsDTO,
 ): Promise<ArticlesResultDTO> => {
-  const articles = await articlesSchema.find({ public: true, group: group._id }).sort({ publishedAt: "desc" }).exec();
+  const articles = await articlesSchema.find({ publish: true, group: group._id }).sort({ publishedAt: "desc" }).exec();
   if(articles) {
     return { result: "success", message: "Articles found.", articles: articles };
   } else {
@@ -193,7 +193,7 @@ export const getPublicArticlesByGroup = async (
 export const getPublicArticlesByAuthor = async (
   author: AccountsDTO,
 ): Promise<ArticlesResultDTO> => {
-  const articles = await articlesSchema.find({ public: true, author: author._id }).sort({ publishedAt: "desc" }).exec();
+  const articles = await articlesSchema.find({ publish: true, author: author._id }).sort({ publishedAt: "desc" }).exec();
   if(articles) {
     return { result: "success", message: "Articles found.", articles: articles };
   } else {
@@ -220,6 +220,25 @@ export const getArticle = async (
 }
 
 /**
+ * Get public article by header.
+ * @function
+ * @async
+ * @param {string} header - The identifier of the article to be searched.
+ * @returns {Promise<ArticleResultDTO>} - A promise that resolves to null or the article.
+ */
+export const getPublicArticleByHeader = async (
+  header: string,
+): Promise<ArticleResultDTO> => {
+  header = decodeURIComponent(header);
+  const article = await articlesSchema.findOne({ header: header }).exec();
+  if(article) {
+    return { result: "success", message: "Articles found.", article: article };
+  } else {
+    throw new Error("Could not find articles.")
+  }
+}
+
+/**
  * Get article by group.
  * @function
  * @async
@@ -229,7 +248,7 @@ export const getArticle = async (
 export const getArticlesByGroup = async (
   group: GroupsDTO
 ): Promise<ArticlesResultDTO> => {
-  const articles = await articlesSchema.find({ group: group._id }).sort({ publishedAt: "desc" }).exec();
+  const articles = await articlesSchema.find({ publish: true, group: group._id }).sort({ publishedAt: "desc" }).exec();
   if(articles) {
     return { result: "success", message: "Articles found.", articles: articles };
   } else {

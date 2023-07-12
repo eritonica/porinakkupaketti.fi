@@ -25,6 +25,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Page />} />
       <Route path="/:page" element={<Page />} />
+      <Route path="/:page/:article" element={<Page />} />
       <Route path="/hoosatcms" element={<Admin />} />
       <Route path="/hoosatcms/:page" element={<Admin />} />
     </Routes>
