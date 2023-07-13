@@ -1,10 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { Flex, Markdown } from '../HoosatUI';
 import { PageDTO } from '../HoosatCMS-client/src/@types';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { Article } from './Article';
 
+
+const Loading = () => {
+  return <h2>🌀 Loading...</h2>;
+}
 
 export const Contents = () => {
   const location = useLocation();
@@ -49,11 +53,13 @@ export const Contents = () => {
     ?
       <Article></Article>
     : <Flex>
-      <Helmet>
-        <title>{`Porin Akkupaketti - ${page?.name}`}</title>
-        <meta name="description" content={page?.markdown?.substring(0, 30)} />
-      </Helmet>
-      <Markdown markdown={(page?.markdown !== undefined) ? page?.markdown : ""}></Markdown>
-    </Flex>
+        <Helmet>
+          <title>{`Porin Akkupaketti - ${page?.name}`}</title>
+          <meta name="description" content={page?.markdown?.substring(0, 30)} />
+        </Helmet>
+        <Suspense fallback={<Loading />}>
+          <Markdown markdown={page?.markdown ?? ""}></Markdown>
+        </Suspense>
+      </Flex>
   );
 }
