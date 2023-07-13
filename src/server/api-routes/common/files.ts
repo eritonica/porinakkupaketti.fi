@@ -84,7 +84,16 @@ filesRouter.Delete('/api/files/:fileId', async (req, res) => {
     }
     const deleted = await deleteFile(req.params?.['fileId']);
     unlink(deleted.file.filepath!, (err) => {
-      DEBUG.log(`${deleted.file.filepath} was deleted\r\n${err}`);
+      DEBUG.log(`${deleted.file.filepath} was not deleted\r\n ${err}`);
+    });
+    unlink(deleted.file.filepath! + ".br", (err) => {
+      DEBUG.log(`${deleted.file.filepath} was not deleted\r\n ${err}`);
+    });
+    unlink(deleted.file.filepath! + ".deflate", (err) => {
+      DEBUG.log(`${deleted.file.filepath} was not deleted\r\n ${err}`);
+    });
+    unlink(deleted.file.filepath! + ".gzip", (err) => {
+      DEBUG.log(`${deleted.file.filepath} was not deleted\r\n ${err}`);
     });
     return res.status(200).json({ result: 'success', message: 'File deleted successfully.' });
   } catch (error) {
