@@ -8,10 +8,18 @@ import i18n from './i18n';
 
 import "./index.css"
 
+declare global {
+  interface Window {
+    __HELMET_CONTEXT__: any; // Replace 'any' with the type of your 'HelmetContext' if possible
+  }
+}
+
 if (!('process' in window)) {
   // @ts-ignore
   window.process = {}
 }
+
+const initialHelmetState = window.__HELMET_CONTEXT__;
 
 // Get the root DOM node to hydrate the app into
 const domNode = document.getElementById('root');
@@ -26,7 +34,7 @@ if (domNode === null) {
     // Wrap the App component in a StrictMode component for extra runtime checks
     <React.StrictMode>
       <I18nextProvider i18n={i18n}>
-        <HelmetProvider>
+        <HelmetProvider context={initialHelmetState}>
           {/* Use a BrowserRouter to enable client-side routing */}
           <BrowserRouter>
             <App />

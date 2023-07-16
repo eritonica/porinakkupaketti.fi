@@ -212,43 +212,43 @@ export const Compliance: React.FC<Props> = (props) => {
             : <Selection { ...props }>
                 <div id="inputs">
                   <div style={{ width: "100%",  padding: "5px" }}>
-                    <p>{t("Select the cookie types you want to allow on this website.")}</p>
+                    <p>{t("compliance.header")}</p>
                   </div>
                   <div style={{ padding: "5px" }}>
-                    <label style={{ paddingRight: "5px"}} htmlFor="necessaries-select">{t("Necessary")}:</label>
+                    <label style={{ paddingRight: "5px"}} htmlFor="necessaries-select">{t("compliance.necessary")}:</label>
                     <select id="necessaries-select" className='yesno' value={selections.necessaries}
                       onChange={(e) => { saveSelection({ ...selections, necessaries: e.target.value })}}>
-                      <option value="true">{t("Allow")}</option>
-                      <option value="false">{t("Don't allow")}</option>
+                      <option value="true">{t("compliance.true")}</option>
+                      <option value="false">{t("compliance.false")}</option>
                     </select>
                   </div>
                   <div style={{ padding: "5px" }}>
-                    <label style={{ paddingRight: "5px"}} htmlFor="preferences-select">{t("Preferences")}:</label>
+                    <label style={{ paddingRight: "5px"}} htmlFor="preferences-select">{t("compliance.preferences")}:</label>
                     <select id="preferences-select" className='yesno' value={selections.preferences}
                       onChange={(e) => { saveSelection({ ...selections, preferences: e.target.value })}}>
-                      <option value="true">{t("Allow")}</option>
-                      <option value="false">{t("Don't allow")}</option>
+                      <option value="true">{t("compliance.true")}</option>
+                      <option value="false">{t("compliance.false")}</option>
                     </select>
                   </div>
                   <div style={{ padding: "5px" }}>
-                    <label style={{ paddingRight: "5px"}} htmlFor="statistics-select">{t("Statistic")}:</label>
+                    <label style={{ paddingRight: "5px"}} htmlFor="statistics-select">{t("compliance.statistic")}:</label>
                     <select id="statistics-select" className='yesno' value={selections.statistics}
                       onChange={(e) => { saveSelection({ ...selections, statistics: e.target.value })}}>
-                      <option value="true">{t("Allow")}</option>
-                      <option value="false">{t("Don't allow")}</option>
+                      <option value="true">{t("compliance.true")}</option>
+                      <option value="false">{t("compliance.false")}</option>
                     </select>
                   </div>
                   <div style={{ padding: "5px" }}>
-                    <label style={{ paddingRight: "5px"}} htmlFor="marketings-select">{t("Marketing")}:</label>
+                    <label style={{ paddingRight: "5px"}} htmlFor="marketings-select">{t("compliance.marketing")}:</label>
                     <select id="marketings-select" className='yesno' value={selections.marketings}
                       onChange={(e) => { saveSelection({ ...selections, marketings: e.target.value })}}>
-                      <option value="true">{t("Allow")}</option>
-                      <option value="false">{t("Don't allow")}</option>
+                      <option value="true">{t("compliance.true")}</option>
+                      <option value="false">{t("compliance.false")}</option>
                     </select>
                   </div>
                 </div>
                 <div style={{ padding: "5px", paddingRight: "15px", flexGrow: "3", display: "flex", alignItems: "center", justifyContent: "right" }}>
-                  <button type="button" id="saveButton" onClick={() => { setSelection(false); saveSelection({ ...selections }); }}>{t("Save selected")}</button>
+                  <button type="button" id="saveButton" onClick={() => { setSelection(false); saveSelection({ ...selections }); }}>{t("compliance.save")}</button>
                 </div>
               </Selection>
           }

@@ -1,4 +1,14 @@
 {
+  "compliance": {
+    "header" : "Valitse minkä tyyppiset keksit haluat sallia nettisivulla.",
+    "true": "Salli",
+    "false": "Älä sali",
+    "save": "Tallenna valinta",
+    "necessary": "Tarpeellinen",
+    "preferences": "Mieltymykset",
+    "statistic": "Tilastot",
+    "marketing": "Markkinointi"
+  },
   "pages": {
     "header": "Sivut",
     "list-button": "Sivut",

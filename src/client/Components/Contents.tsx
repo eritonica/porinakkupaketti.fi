@@ -13,6 +13,12 @@ const Loading = () => {
 export const Contents = () => {
   const location = useLocation();
   const [ page, setPage ] = useState<PageDTO>();
+  const [ meta, setMeta ] = useState({
+    title: "", 
+    description: "",
+    url: "",
+    image: "",
+  });
 
   const loadPageContent = useCallback(() => {
     console.log(location);
@@ -39,6 +45,12 @@ export const Contents = () => {
       if(process.env.NODE_ENV === "development") console.log("response: ", response);
       if(response.result === "success") {
         setPage(response.page)
+        setMeta({
+          title: `Porin Akkupaketti - ${page?.name}`,
+          description: response.page?.markdown?.replace(/^.*\n+/, '').substring(0, 160) + ", Porin Akkupaketti (c) MTH-TEK tmi, Author: Hoosat Oy, Designer: Toni Lukkaroinen",
+          url: window.location.href,
+          image: findImageUrl(response.page?.markdown),
+        })
       } else {
         setPage(undefined)
       }
@@ -47,15 +59,40 @@ export const Contents = () => {
   }, [location])
 
   useEffect(loadPageContent, [location, loadPageContent]);
-  
+
+  const findImageUrl = (text: string) => {
+    const regex = /!\[(.*?)\]\((.*?)\)/;
+    const match = regex.exec(text);
+    if (match) {
+      const url = match[2];
+      return url
+    }
+    return "";
+  }
+
   return (
     (location.pathname.startsWith("/blog"))
     ?
       <Article></Article>
     : <Flex>
         <Helmet>
-          <title>{`Porin Akkupaketti - ${page?.name}`}</title>
-          <meta name="description" content={page?.markdown?.substring(0, 30)} />
+          {
+            (!location.pathname.startsWith("/")) && 
+            <>
+              <title>{meta.title}</title>
+              <meta name="description" content={meta.description}/>
+              <meta property="og:title" content={meta.title} />
+              <meta property="og:description" content={meta.description} />
+              <meta property="og:image" content={meta.image} />
+              <meta property="og:url" content={meta.url} />
+              <meta property="og:type" content="website" />
+
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:title" content={meta.title} />
+              <meta name="twitter:description" content={meta.description} />
+              <meta name="twitter:image" content={meta.image} />
+            </>
+          }
         </Helmet>
         <Suspense fallback={<Loading />}>
           <Markdown markdown={page?.markdown ?? ""}></Markdown>
