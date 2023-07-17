@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RoundClickable } from './Components/RoundClickable';
 import { Selection } from './Components/Selection';
