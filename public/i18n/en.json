@@ -50,7 +50,8 @@
     "add": {
       "header": "Name:",
       "submit-button": "Save Article"
-    }
+    },
+    "load-more": "Load more"
   },
   "files": {
     "header": "Files:",

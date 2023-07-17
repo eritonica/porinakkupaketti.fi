@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export const ArticlesArchive = () => {
   const [ articles, setArticles ] = useState<ArticleDTO[]>();
 
-  const getArticles = useCallback(() => {
+  const loadArticles = useCallback(() => {
     const fetchArticles = async () => {
       const api = process.env.REACT_APP_API_ENDPOINT;
       if(api === undefined) {
@@ -34,7 +34,7 @@ export const ArticlesArchive = () => {
     fetchArticles();
   }, [])
 
-  useEffect(getArticles, [getArticles]);
+  useEffect(loadArticles, [loadArticles]);
 
   const findImageUrl = (text: string) => {
     const regex = /!\[(.*?)\]\((.*?)\)/;

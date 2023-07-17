@@ -1,0 +1,48 @@
+.Articles {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+}
+
+.Articles > h1 {
+  color: #f5f5f5;
+  font-family: 'Leckerli One', cursive;
+  font-weight: normal;
+  text-align: center;
+}
+
+
+.Articles > .List {
+  padding: 0px;
+  margin: 0px;
+}
+
+.article-link img {
+  width: 200px;
+}
+
+.article-link .Paragraph {
+  margin: 0px;
+}
+
+.article-link .h2 {
+  margin: 0px;
+}
+
+.article-link {
+  display: flex;
+  align-items: center;
+}
+
+.article-link-image {
+  flex: 0 0 auto;
+  margin-right: 25px;
+}
+
+.article-link-content {
+  flex: 1 1 auto;
+}
+
+.article-link-content > .markdown-snippet {
+  padding: 0.5rem 1rem;
+}

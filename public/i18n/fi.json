@@ -50,7 +50,8 @@
     "add": {
       "header": "Nimi:",
       "submit-button": "Tallenna"
-    }
+    },
+    "load-more": "Lisää"
   },
   "files": {
     "header": "Tiedostot:",
