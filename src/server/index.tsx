@@ -102,7 +102,8 @@ router.Get("*", async (req, res) => {
     jsx: jsx, 
     helmetContext: helmetContext, 
     extractCSS: true, 
-    preloadTagFolder: './build/public'
+    preloadTagFolder: './build/public',
+    headTags: {}
   });
 });
 
