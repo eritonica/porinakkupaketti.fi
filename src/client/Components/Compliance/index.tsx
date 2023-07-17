@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RoundClickable } from './Components/RoundClickable';
 import { Selection } from './Components/Selection';
@@ -203,12 +203,25 @@ export const Compliance: React.FC<Props> = (props) => {
     document.cookie = "selections_marketing=true;sameSite=Strict";
   }, []);
 
+  const [isLottiePaused, setIsLottiePaused] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLottiePaused(!isLottiePaused);
+    }, 5000);
+    return () => {
+      clearTimeout(timer);
+    }
+  }, [isLottiePaused]);
+
   return (
         <div className="fixedBottomLeft">
           { (selection === false)
             ? (props.roundText !== "" && props.roundText !== undefined)   
               ? <RoundClickable { ...props } onClick={() => setSelection(true)}>{props.roundText}</RoundClickable>
-              : <div onClick={() => setSelection(true)}><Lottie loop animationData={cookieLottie} play style={{width: "65px", height: "65px"}} /></div>
+              : <div onClick={() => setSelection(true)}>
+                  <Lottie loop animationData={cookieLottie} play style={{width: "65px", height: "65px"}} speed={(isLottiePaused === true) ? 0 : 0.6}/>
+                </div>
             : <Selection { ...props }>
                 <div id="inputs">
                   <div style={{ width: "100%",  padding: "5px" }}>
