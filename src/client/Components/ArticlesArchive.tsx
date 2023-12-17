@@ -10,12 +10,7 @@ export const ArticlesArchive = () => {
 
   const loadArticles = useCallback(() => {
     const fetchArticles = async () => {
-      const api = process.env.REACT_APP_API_ENDPOINT;
-      if(api === undefined) {
-        if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
-        return;
-      }
-      const uri = `${api}/articles/public/domain/${window.location.hostname}`;
+      const uri = `/api/articles/public/domain/${window.location.hostname}`;
       const fetchResult = await fetch(uri, {
         method: "GET",
         headers: {

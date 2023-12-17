@@ -9,12 +9,7 @@ export const Navigation = () => {
 
   const getPagesByDomain = useCallback(() => {
     const fetchPages = async () => {
-      const api = process.env.REACT_APP_API_ENDPOINT;
-      if(api === undefined) {
-        if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
-        return;
-      }
-      const uri = `${api}/pages/domain/${window.location.hostname}`;
+      const uri = `/api/pages/domain/${window.location.hostname}`;
       const fetchResult = await fetch(uri, {
         method: "GET",
         headers: {

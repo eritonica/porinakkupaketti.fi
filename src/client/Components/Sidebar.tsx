@@ -16,12 +16,7 @@ export const Sidebar = () => {
   const [submitButtonText, setSubmitButtonText] = useState("Lähetä");
 
   const sendContactForm = async () => {
-    const api = process.env.REACT_APP_API_ENDPOINT;
-    if(api === undefined) {
-      if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
-      return;
-    }
-    const uri = `${api}/contact/email`;
+    const uri = `/api/contact/email`;
     if(process.env.REACT_APP_FORM_TO_EMAIL === undefined) {
       if(process.env.NODE_ENV === "development") console.log("REACT_APP_FORM_TO_EMAIL has not been set in environment.");
       return;

@@ -24,7 +24,7 @@
     "dev": "concurrently \"npm run dev:build:client\" \"npm run dev:build:server\" \"npm run dev:run\"",
     "build:client": "npm run move:assets && webpack --config webpack.client.config.js --mode=production",
     "build:server": "webpack --config webpack.server.config.js --mode=production",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run clean && npm run build:client && npm run build:server",
     "start": "node  -r dotenv/config --experimental-modules build/server.js",
     "backup-mongodb": "npm run move:assets && node -r dotenv/config --experimental-modules build/mongodb-backup.js",
     "deploy": "npm run build && rsync --exclude='.git' --exclude='.env' --exclude='node_modules' -rPz ./ marko@mthtek.net:~/porinakkupaketti.fi"

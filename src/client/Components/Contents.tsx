@@ -23,16 +23,11 @@ export const Contents = () => {
   const loadPageContent = useCallback(() => {
     console.log(location);
     const fetchPages = async () => {
-      const api = process.env.REACT_APP_API_ENDPOINT;
-      if(api === undefined) {
-        if(process.env.NODE_ENV === "development") console.log("REACT_APP_API_ENDPOINT has not been set in environment.");
-        return;
-      }
       let pathname = location.pathname;
       if(location.pathname === "/") {
         pathname = "/index"
       } 
-      const uri = `${api}/pages/domain/${window.location.hostname}/link${pathname}`;
+      const uri = `api/pages/domain/${window.location.hostname}/link${pathname}`;
       const fetchResult = await fetch(uri, {
         method: "GET",
         headers: {
