@@ -43,7 +43,7 @@ commentsRouter.Put("/api/comments/", async (req, res) => {
     if (group === undefined) {
       return res.status(401).json({ result: "error", message: "Could not find comment group id." });
     }
-    let { permission } = await confirmGroupPermission("WRITE", group._id,  account);
+    let { permission } = await confirmGroupPermission("WRITE", { _id: group._id },  account);
     let result = {} as CommentResultDTO;
     if(permission === true || (comment.author?.type === "authenticated" && comment.author?.account === account._id)) {
       result = await updateComment(comment);

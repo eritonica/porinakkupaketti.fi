@@ -97,7 +97,10 @@ pagesRouter.Delete("/api/pages/:id", async (req, res) => {
     if(permission !== true) {
       return res.status(500).json({ result: "error", message: "No permission." })
     }
-    return res.status(200).json(await deletePage(req.params?.['id']));
+    if (req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters." })
+    }
+    return res.status(200).json(await deletePage(req.params['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -118,7 +121,10 @@ pagesRouter.Delete("/api/pages/:id", async (req, res) => {
 pagesRouter.Get("/api/pages/link/:link", async (req, res) => {
   try {
     DEBUG.log(req.params?.['link']);
-    return res.status(200).json(await getPageByLink(req.params?.['link']));
+    if (req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters." })
+    }
+    return res.status(200).json(await getPageByLink(req.params['link']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -226,7 +232,10 @@ pagesRouter.Get("/api/pages/group/:group", async (req, res) => {
  */
 pagesRouter.Get("/api/pages/:id", async (req, res) => { 
   try {
-    return res.status(200).json(await getPage(req.params?.['id']));
+    if (req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters." })
+    }
+    return res.status(200).json(await getPage(req.params['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }

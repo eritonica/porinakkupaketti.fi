@@ -27,7 +27,7 @@
     "build": "npm run build:client && npm run build:server",
     "start": "node  -r dotenv/config --experimental-modules build/server.js",
     "backup-mongodb": "npm run move:assets && node -r dotenv/config --experimental-modules build/mongodb-backup.js",
-    "deploy": "npm run build && rsync --exclude='.git' --exclude='.env' --exclude='node_modules' -rPz ./ marko@mthtek.fi:~/porinakkupaketti.fi"
+    "deploy": "npm run build && rsync --exclude='.git' ' --exclude='node_modules' -rPz ./ marko@mthtek.fi:~/porinakkupaketti.fi"
   },
   "experiments": {
     "topLevelAwait": true

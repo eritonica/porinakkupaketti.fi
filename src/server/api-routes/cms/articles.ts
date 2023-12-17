@@ -134,7 +134,10 @@ articlesRouter.Delete("/api/articles/:id", async (req, res) => {
     if(permission !== true) {
       return res.status(500).json({ result: "error", message: "No permission." })
     }
-    return res.status(200).json(await deleteArticle(req.params?.['id']));
+    if (req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters." })
+    }
+    return res.status(200).json(await deleteArticle(req.params['id']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -197,7 +200,10 @@ articlesRouter.Get("/api/articles/group/:id", async (req, res) => {
  */
 articlesRouter.Get("/api/articles/public/domain/:domain", async (req, res) => {
   try {
-    return res.status(200).json(await getPublicArticlesByDomain(req.params?.['domain']));
+    if (req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters." })
+    }
+    return res.status(200).json(await getPublicArticlesByDomain(req.params['domain']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }
@@ -214,7 +220,10 @@ articlesRouter.Get("/api/articles/public/domain/:domain", async (req, res) => {
  */
 articlesRouter.Get("/api/articles/domain/:domain", async (req, res) => {
   try {
-    return res.status(200).json(await getArticlesByDomain(req.params?.['domain']));
+    if (req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters." })
+    }
+    return res.status(200).json(await getArticlesByDomain(req.params['domain']));
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
   }

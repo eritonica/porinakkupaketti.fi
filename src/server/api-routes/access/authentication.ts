@@ -151,7 +151,10 @@ authenticationRouter.Post("/api/authentication/register", async (req, res) => {
 */
 authenticationRouter.Get("/api/authentication/activate/:code", async (req, res) => {
   try {
-    const account = await activateAccount(req.params?.['code']);
+    if(req.params === undefined) {
+      return res.status(404).json({ result: "error", message: "No parameters" });
+    }
+    const account = await activateAccount(req.params['code']);
     if(account !== null && account !== undefined) {
       return res.status(200).json({ result: "success", message: "Account activated.", account: account });
     } else {

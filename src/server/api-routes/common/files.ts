@@ -5,6 +5,7 @@ import { confirmGroupPermission, confirmPermission, getGroup } from '../../lib/a
 import { confirmToken } from '../../lib/access/sessions';
 import { createFile, deleteFile, listFilesByGroup, listFilesByAuthor, listFilesByDomain, getFile } from '../../lib/common/files';
 import { FilesDTO } from '../../lib/common/schemas/filesSchema';
+import mongoose from 'mongoose';
 
 const filesRouter = createRouter();
 
@@ -38,7 +39,11 @@ filesRouter.Post('/api/files', async (req, res) => {
 filesRouter.Get('/api/files/group/:groupId', async (req, res) => {
   try {
     const { account } = await confirmToken(req.headers.authorization);
-    const { group } = await getGroup(req.params?.['groupId']);
+    if (req.params === undefined) {
+      return res.status(404).json({ result: 'error', message: "No parameters" });
+    }
+    const groupId = new mongoose.Types.ObjectId(req.params['groupId']);
+    const { group } = await getGroup(groupId);
     const { result } = await confirmGroupPermission('READ', group, account);
     if (result !== "success") {
       return res.status(500).json({ result: 'error', message: "No permission" });
@@ -57,7 +62,10 @@ filesRouter.Get('/api/files/domain/:domain', async (req, res) => {
     if (result !== "success") {
       return res.status(500).json({ result: 'error', message: "No permission" });
     }
-    const files = await listFilesByDomain(group, req.params?.['domain']);
+    if (req.params === undefined) {
+      return res.status(404).json({ result: 'error', message: "No parameters" });
+    }
+    const files = await listFilesByDomain(group, req.params['domain']);
     return res.status(200).json(files);
   } catch (error) {
     return res.status(500).json(ErrorHandler(error));
@@ -82,7 +90,10 @@ filesRouter.Delete('/api/files/:fileId', async (req, res) => {
     if (result !== "success") {
       return res.status(500).json({ result: 'error', message: "No permission" });
     }
-    const deleted = await deleteFile(req.params?.['fileId']);
+    if (req.params === undefined) {
+      return res.status(404).json({ result: 'error', message: "No parameters" });
+    }
+    const deleted = await deleteFile(req.params['fileId']);
     unlink(deleted.file.filepath!, (err) => {
       DEBUG.log(`${deleted.file.filepath} was not deleted\r\n ${err}`);
     });
