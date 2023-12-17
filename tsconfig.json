@@ -2,11 +2,11 @@
   // Specify the compiler options
   "compilerOptions": {
     // Set the output directory to "dist"
-    "outDir": "./build/ts",
+    "outDir": "./build",
     // Set the module system to "esnext"
     "module": "esnext",
     // Set the ECMAScript target version to "ES2020"
-    "target": "ES2020",
+    "target": "esnext",
     // Enable JSX support for React components
     "jsx": "react",
     // Specify the library files to include
@@ -41,14 +41,28 @@
     // [Optional] Enable strict function types
     "strictFunctionTypes": true,
     // [Optional] Enable no unused variables check
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     // [Optional] Enable no unused parameters check
     "noUnusedParameters": true,
     // Enable @types in src folder.
-    "skipDefaultLibCheck": true
+    "baseUrl": "./",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+  },
+  "ts-node": {
+    "files": true,
+    "transpileOnly": true,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "module": "ESNext", 
+      "moduleResolution": "node"
+    }
+  },
+  "typedocOptions": {
+    "entryPoints": ["./src"],
+    "entryPointStrategy": "expand",
+    "out": "public/docs"
   },
   // Specify the files and directories to include in compilation
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

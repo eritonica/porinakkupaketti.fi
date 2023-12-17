@@ -89,7 +89,7 @@ export const listFilesByAuthor = async (author: AccountsDTO): Promise<FilesResul
  * @returns A Promise that resolves to a FilesResultDTO.
  * @throws An error if no files are found for the specified domain.
  */
-export const listFilesByDomain = async (group: GroupsDTO, domain: AccountsDTO): Promise<FilesResultDTO> => {
+export const listFilesByDomain = async (group: GroupsDTO, domain: string): Promise<FilesResultDTO> => {
   DEBUG.log(domain);
   const files = await filesSchema.find({ group: group._id, domain: domain }).exec();
   if (files) {
