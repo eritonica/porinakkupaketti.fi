@@ -17,7 +17,7 @@
     "clean-compressed": "find build/public/ -type f \\( -name \"*.gzip\" -o -name \"*.br\" -o -name \"*.deflate\" \\) -exec rm {} +",
     "clean": "rm -rf build && mkdir -p build/public",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "move:assets": "cp -R public/. build/public && cp src/mongodb-backup.js build/public/mongodb-backup.js ",
+    "move:assets": "npx mkdirp build && npx ncp public build/public && cp src/mongodb-backup.js build/public/mongodb-backup.js",
     "dev:build:client": "npm run move:assets && webpack --config webpack.client.config.js --mode=development --watch",
     "dev:build:server": "webpack --config webpack.server.config.js --mode=development --watch",
     "dev:run": "nodemon -r dotenv/config --experimental-modules build/server.js",
