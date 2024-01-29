@@ -1,52 +1,104 @@
 // webpack.client.config.js
-
-// Import the "resolve" method from the "path" module
+import webpack from 'webpack';
 import { resolve as _resolve } from "path";
+import TerserPlugin from 'terser-webpack-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-// Export the configuration object
-export default {
-  // Set the source map type to "source-map" for easier debugging
-  devtool: "source-map",
-  // Set the build mode to "development"
-  mode: "development",
-  // Specify the target environment as "web" to bundle for web browsers
-  target: "web",
-  // Specify the entry point for the client application
-  entry: "./src/client/index.tsx",
-  // Specify the output file name and path
-  output: {
-    filename: "bundle.js",
-    path: _resolve("./build/public"),
-    // Set the output format to "module"
-    module: true,
-    // Set the chunk format to "module"
-    chunkFormat: "module",
-    // Set the library target to "module"
-    library: { type: "module" },
-    libraryTarget: "module",
-  },
-  // Enable the "outputModule" experiment
-  experiments: {
-    outputModule: true,
-  },
-  // Specify the module loaders and rules
-  module: {
-    rules: [
-      // Use the "style-loader" and "css-loader" to load CSS files
-      {
-        test: /.css$/i,
-        use: ["style-loader", "css-loader"],
+
+export default (env, argv) => {
+  const isDevelopment = argv.mode === 'development'
+  const buildDir = isDevelopment ? 'build-dev' : 'build';
+  const plugins = [];
+  if (process.env.ANALYZE) {
+    plugins.push(new BundleAnalyzerPlugin());
+  }
+  return {
+    devtool: "source-map",
+    mode: argv.mode,
+    target: "web",
+    entry: './src/client/index.tsx',  
+    output: {
+      filename: "bundle.[contenthash].js",
+      path: _resolve(`./${buildDir}/public`),
+    },
+    experiments: {
+      outputModule: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/i,
+          use: ["css-loader"],
+        },
+        {
+          test: /\.(png\|jpg\|gif\|avif\|\/otf\/|ttf)$/i,
+          loader: 'ignore-loader',
+        },
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: [
+            /node_modules/,
+            /node_modules\/(dotenv|google-auth-library|formidable|dotenv|mongoose)/,
+            /node_modules\/(nodemailer|sync-fetch|uuid|ws|chokidar-cli|compression-webpack-plugin)/,
+            /node_modules\/(css-loader|esm|file-loader|jest|json-loader|mkdirp|ncp|node-loader)/,
+            /node_modules\/(nodemon|npm-run-all|style-loader|terser-webpack-plugin|ts-loader|ts-node)/,
+            /node_modules\/(tsconfig-paths|typescript|webpack|webpack-bundle-analyzer|webpack-cli)/,
+            /node_modules\/(webpack-dev-server|webpack-node-externals)/
+
+          ],
+          use: ["ts-loader"],
+        },
+      ],
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js", ".jsx"],
+    },
+    plugins: plugins,
+    optimization: {
+      emitOnErrors: false,
+      moduleIds: 'hashed',
+      minimize: true,
+      minimizer: [new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          compress: {
+            // Enable aggressive minification options
+            defaults: true,
+            arrows: true,
+            arguments: true,
+            module: true,
+            unused: true,
+            dead_code: true,
+            conditionals: true,
+            booleans: true,
+            loops: true,
+            passes: 5,
+          },
+        },
+      }),],
+      runtimeChunk: 'single', 
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 1000000,
+        minChunks: 1,
+        maxAsyncRequests: 15,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
       },
-      // Use the "ts-loader" to transpile TypeScript files
-      {
-        test: /.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ["ts-loader"],
-      },
-    ],
-  },
-  // Specify the file extensions to resolve
-  resolve: {
-    extensions: [".tsx", ".ts", ".js", ".jsx"],
+      usedExports: true,
+    }
   }
 };

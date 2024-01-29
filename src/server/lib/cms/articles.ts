@@ -124,7 +124,7 @@ export const deleteArticle = async (
 ): Promise<ArticleResultDTO> => {
   const deletedArticle = await articlesSchema.findOneAndDelete({ _id: id}).exec();
   if(deletedArticle) {
-    return { result: "success", message: "Article has been deleted.", article: deletedArticle };
+    return { result: "success", message: "Article has been deleted.", article: deletedArticle as ArticlesDTO };
   } else {
     throw new Error("Could not delete article.")
   }

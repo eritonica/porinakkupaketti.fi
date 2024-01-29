@@ -19,7 +19,7 @@ import { Admin } from './HoosatCMS-client';
 import { Compliance } from './Components/Compliance';
 
 
-export default function App() {
+export const App = (): JSX.Element => {
   return (
     <>
     <Routes>

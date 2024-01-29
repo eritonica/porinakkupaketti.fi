@@ -26,7 +26,7 @@ export interface AnonymousAuthor {
 }
 
 export interface CommentsDTO {
-  _id: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   parent?: PostTargetComment | PageTargetComment | CommentTargetComment;
   author?: AuthenticatedAuthor | AnonymousAuthor;
   markdown?: string;

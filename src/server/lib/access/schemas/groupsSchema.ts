@@ -1,7 +1,7 @@
 import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface GroupsDTO {
-  _id: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   name?: string;
   ycode?: string;
   address?: string;

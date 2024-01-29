@@ -1,7 +1,7 @@
 import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface ArticlesDTO {
-  _id: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   group?: mongoose.Types.ObjectId;
   author?: mongoose.Types.ObjectId;
   header?: string;

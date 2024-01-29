@@ -1,17 +1,17 @@
 import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface PagesDTO  {
-  _id: mongoose.Types.ObjectId;
-  group: mongoose.Types.ObjectId;
-  author: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
+  group?: mongoose.Types.ObjectId;
+  author?: mongoose.Types.ObjectId;
   name?: string;
   order?: number;
   link?: string;
   markdown?: string;
   icon?: string;
   domain?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface PagesDBO extends PagesDTO, Document {

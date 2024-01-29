@@ -1,88 +1,72 @@
 // webpack.server.config.js
-
-
-// Import the "resolve" method from the "path" module
-import { resolve as _resolve } from "path";
+import path, { resolve as _resolve } from "path";
 import webpack from 'webpack';
-//import nodeExternals from "webpack-node-externals";
 
-// Export the configuration object
-export default {
-  // Set the source map type to "source-map" for easier debugging
-  devtool: "source-map",
-  // Set the build mode to "development"
-  mode: "development",
-  // Specify the target environment as "node" to bundle for Node.js
-  target: "node",
-  // Specify the entry point for the server application
-  entry: "./src/server/index.tsx",
-  // Specify the output file name and path
-  output: {
-    filename: "server.js",
-    path: _resolve("./build"),
-    // Set the output format to "module"
-    module: true,
-    // Set the chunk format to "module"
-    chunkFormat: "module",
-    // Set the library target to "module"
-    library: { type: "module" },
-    libraryTarget: "module",
-  },
-  // Enable the "outputModule" experiment
-  experiments: {
-    outputModule: true,
-  },
-  // Specify the module loaders and rules
-  module: {
-    rules: [
-      // Use the "ts-loader" to transpile TypeScript files
-      {
-        test: /.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ["ts-loader"],
-      },
-      // Use the "style-loader" and "css-loader" to load CSS files
-      {
-        test: /.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-        type: 'javascript/auto',
-      },
-      {
-        test: /\.(node|png|jpg|gif)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-        },
-      },
-      {
-        test: /\.node$/,
-        loader: 'node-loader',
-      },
-    ],
-  },
-  // Specify the file extensions to resolve
-  resolve: {
-    alias: {
-      'mongodb-client-encryption': 'mongodb-client-encryption-browserify'
+
+export default (env, argv) => {
+  const isDevelopment = argv.mode === 'development'
+  const buildDir = isDevelopment ? 'build-dev' : 'build';
+  return {
+    devtool: "source-map",
+    mode: argv.mode || "development",
+    target: "node",
+    entry: "./src/server/index.tsx",
+    output: {
+      filename: "server.js",
+      path: _resolve(`./${buildDir}`),
+      module: true,
+      chunkFormat: "module",
+      library: { type: "module" },
+      libraryTarget: "module",
     },
-    extensions: [".tsx", ".ts", ".js", ".jsx", ".node"],
-  },
-  ignoreWarnings: [
-    /aws-crt/, 
-    /mongodb\/lib\/utils.js/, 
-    /mongodb\/lib\/deps.js/
-  ],
-  plugins: [
-    new webpack.DefinePlugin({
-      'global.GENTLY': false,
-    }),
-    new webpack.DefinePlugin({
-      '__filename': false,
-      '__dirname': false
-    }),
-  ],
+    experiments: {
+      outputModule: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: ["ts-loader"],
+        },
+        {
+          test: /\.css$/i,
+          use: ["css-loader"],
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader',
+          type: 'javascript/auto',
+        },
+        {
+          test: /\.(png\|jpg\|gif\|avif\|\/otf\/|ttf)$/i,
+          loader: 'ignore-loader',
+        },
+        {
+          test: /\.node$/,
+          loader: 'node-loader',
+        },
+      ],
+    },
+    resolve: {
+      alias: {
+        'mongodb-client-encryption': 'mongodb-client-encryption-browserify'
+      },
+      extensions: [".tsx", ".ts", ".js", ".jsx"],
+    },
+    ignoreWarnings: [
+      /aws-crt/, 
+      /mongodb\/lib\/utils.js/, 
+      /mongodb\/lib\/deps.js/
+    ],
+    plugins: [
+      new webpack.DefinePlugin({
+        'global.GENTLY': false,
+      }),
+      new webpack.DefinePlugin({
+        '__dirname': JSON.stringify(_resolve()),
+        '__filename': JSON.stringify(_resolve('server.js')),
+      }),
+    ],
+  }
 };

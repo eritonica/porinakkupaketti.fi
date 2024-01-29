@@ -168,7 +168,7 @@ export const deleteComment = async (comment: CommentsDTO): Promise<CommentResult
     return {
       result: "success",
       message: "Comment has been deleted",
-      comment: deletedComment,
+      comment: deletedComment as CommentsDTO,
     };
   } else {
     throw new Error("Could not delete comment.");

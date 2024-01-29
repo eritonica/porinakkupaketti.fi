@@ -88,16 +88,18 @@ const getFeedItemsFromArticles = async (
 ) => {
   const { articles } = await getArticlesByDomain(domain);
   articles.forEach(article => {
-    feed.item({
-      title: (article.header !== undefined) ? article.header : "",
-      description: "",
-      guid: article._id.toString(),
-      url: `https://${domain}/articles/${article._id}`,
-      date: (article.createdAt !== undefined) ? article.createdAt : "",
-      custom_elements: [
-        { 'content:encoded': { _cdata: article.markdown } }
-      ]
-    });
+    if(article !== undefined) {
+      feed.item({
+        title: (article.header !== undefined) ? article.header : "",
+        description: "",
+        guid: article._id?.toString(),
+        url: `https://${domain}/articles/${article._id}`,
+        date: (article.createdAt !== undefined) ? article.createdAt : "",
+        custom_elements: [
+          { 'content:encoded': { _cdata: article.markdown } }
+        ]
+      });
+    }
   });
 }
 
@@ -119,15 +121,17 @@ const getFeedItemsFromPages = async (
 ) => {
   const { pages } = await getPagesByDomain(domain);
   pages.forEach(page => {
-    feed.item({
-      title: (page.name !== undefined) ? page.name : "",
-      description: "",
-      guid: page._id.toString(),
-      url: `https://${domain}/${page._id}`,
-      date: (page.createdAt !== undefined) ? page.createdAt : "",
-      custom_elements: [
-        { 'content:encoded': { _cdata: page.markdown } }
-      ]
-    });
+    if(page !== undefined) {
+      feed.item({
+        title: (page.name !== undefined) ? page.name : "",
+        description: "",
+        guid: page._id?.toString(),
+        url: `https://${domain}/${page._id}`,
+        date: (page.createdAt !== undefined) ? page.createdAt : "",
+        custom_elements: [
+          { 'content:encoded': { _cdata: page.markdown } }
+        ]
+      });
+    }
   });
 }

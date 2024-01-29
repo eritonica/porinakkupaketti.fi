@@ -177,7 +177,7 @@ export const deleteGroup = async (
   return {
     result: "success",
     message: "Deleted group",
-    group: deletedGroup,
+    group: deletedGroup as GroupsDTO,
   };
 }
 

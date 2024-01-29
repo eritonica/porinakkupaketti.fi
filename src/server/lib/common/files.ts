@@ -59,7 +59,7 @@ export const createFile = async (
 export const deleteFile = async (fileId: string): Promise<FileResultDTO> => {
   const deletedFile = await filesSchema.findByIdAndDelete(fileId).exec();
   if (deletedFile) {
-    return { result: "success", message: "File has been deleted.", file: deletedFile };
+    return { result: "success", message: "File has been deleted.", file: deletedFile as FilesDTO };
   } else {
     throw new Error("Could not delete the file.");
   }
@@ -99,7 +99,7 @@ export const listFilesByDomain = async (group: GroupsDTO, domain: string): Promi
   }
 };
 
-export const getFile = async (fid): Promise<FileResultDTO> => {
+export const getFile = async (fid: string | undefined): Promise<FileResultDTO> => {
   const file = await filesSchema.findById(fid).exec();
   if (file) {
     return { result: "success", message: "Files retrieved successfully.", file: file };

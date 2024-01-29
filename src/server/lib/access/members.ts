@@ -99,7 +99,7 @@ export const deleteMember = async (
   return {
     result: "success",
     message: "Member deleted from group",
-    member: member,
+    member: member as MembersDTO,
   }
 }
 

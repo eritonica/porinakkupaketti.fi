@@ -94,7 +94,7 @@ export const updatePage = async (data: PagesDTO): Promise<PageResultDTO> => {
 export const deletePage = async (id: string): Promise<PageResultDTO> => {
   const deletedPage = await pagesSchema.findOneAndDelete({ _id: id }).exec();
   if (deletedPage) {
-    return { result: "success", message: "Page has been deleted.", page: deletedPage };
+    return { result: "success", message: "Page has been deleted.", page: deletedPage as PagesDTO };
   } else {
     throw new Error("Could not delete page.");
   }
